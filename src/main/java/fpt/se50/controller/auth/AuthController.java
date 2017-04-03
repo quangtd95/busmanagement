@@ -26,7 +26,7 @@ import fpt.se50.service.AdminService;
 
 
 @Controller
-public class RegisterController {
+public class AuthController {
 	
 	
 	@Autowired
