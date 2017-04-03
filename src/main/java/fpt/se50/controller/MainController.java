@@ -9,9 +9,4 @@ public class MainController {
 	public String getHome() {
 		return "home";
 	}
-
-	@GetMapping("/login")
-	public String getLogin() {
-		return "login";
-	}
 }

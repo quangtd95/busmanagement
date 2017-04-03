@@ -28,25 +28,15 @@
 					<div class="panel-body">
 
 						<form role="form" data-toggle="validator" class="form-horizontal" method="POST" action="#" onsubmit="return check()"
-							th:action="@{/register}" th:object="${user}">
+							th:action="@{/register}" th:object="${admin}">
 							<input type="hidden" th:field="*{id}" />
-							<div class="form-group">
-								<label for="name" class="col-md-4 control-label">Tên</label>
-								<div class="col-md-6">
-									<input th:field="*{name}" id="name" type="text" placeholder="name" 
-										class="form-control" name="name" value="" required="true"
-										autofocus="true" /> <span class="help-block"> <strong></strong>
-									</span>
-								</div>
-							</div>
-
 							<div
 								class="form-group">
 								<label for="email" class="col-md-4 control-label">Địa
 									chỉ email</label>
 
 								<div class="col-md-6">
-									<input th:field="*{email}" id="email" type="email" placeholder="email" 
+									<input th:field="*{userName}" id="email" type="email" placeholder="email" 
 										class="form-control" name="email" value="" required="true" />
 									<span class="help-block"> <strong></strong>
 									</span>

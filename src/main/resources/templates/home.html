@@ -4,7 +4,15 @@
 <title>Home</title>
 </head>
 <body>
-	Quan ly ben xe da nang!!!
-	Waiting...
+	
+
+	<div sec:authorize="hasRole('ROLE_ANONYMOUS')">
+		Quan ly ben xe da nang!!!
+	<a th:href="@{/login}"><button>Đăng nhập</button></a>
+	</div>
+	<div sec:authorize="isAuthenticated()">
+		<span>Đăng nhập thành công với quyền admin</span>
+		<a th:href="@{/logout}"><button>Logout</button></a>
+	</div>
 </body>
 </html>

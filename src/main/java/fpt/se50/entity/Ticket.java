@@ -36,5 +36,5 @@ public class Ticket {
 	private BusRoute busRoute;
 	
 	@OneToOne(mappedBy="ticket")
-	private Ticket ticket;
+	private Transaction transaction;
 }
