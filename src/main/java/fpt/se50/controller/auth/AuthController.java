@@ -24,7 +24,6 @@ import fpt.se50.entity.Admin;
 import fpt.se50.service.AdminService;
 
 
-
 @Controller
 public class AuthController {
 	

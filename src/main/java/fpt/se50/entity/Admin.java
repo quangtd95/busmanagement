@@ -22,4 +22,16 @@ public class Admin {
 	
 	@Column(name="PASSWORD")
 	private String password;
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String encode) {
+		this.password = encode;
+	}
+
+	public String getUserName() {
+		return userName;
+	}
 }
