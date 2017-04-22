@@ -4,6 +4,8 @@
     <title>Trang chu</title>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta th:name="_csrf" th:content="${_csrf.token}" />
+	<meta th:name="_csrf_header" th:content="${_csrf.headerName}" />
     <link rel="stylesheet"
           href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="css/index.css"/>
@@ -18,6 +20,8 @@
 
     <script
             src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+    <script 
+            src="https://cdnjs.cloudflare.com/ajax/libs/json2/20160511/json2.js"></script>
     <script
             src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="../static/js/master.js" th:src="@{/js/master.js}"></script>
@@ -80,7 +84,7 @@
                     <div class="home-container-button home-left">
                         <button type="button" class="button">Thêm</button>
                         <button type="button" class="button">Sửa</button>
-                        <button type="button" class="button">Xóa</button>
+                        <button id="delete-button" type="button" class="button">Xóa</button>
                     </div>
                 </th:block>
                 <div class="home-container-button home-right">
@@ -113,6 +117,7 @@
                     <tbody>
                     <th:block th:each="busRoute , inerStats : ${busRoutes}">
                         <tr>
+                        	<td style="display:none" th:text="${busRoute.id}"></td>
                             <td th:text="${inerStats.index} + 1"></td>
                             <td th:text="${busRoute.busService.name}"><br/></td>
                             <td><span th:text="${busRoute.source}"></span><br/>Giờ đi: <span

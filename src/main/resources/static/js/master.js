@@ -8,12 +8,47 @@ $(document).ready(function () {
     if (getUrlParameter("true") != null) {
         showWelcomeLoginSuccess();
     }
-    editTableContent();
-});
-function editTableContent() {
-    $('#table-busroute-today > tbody  > tr').each(function(row) {
-        
+    
+    $('#delete-button').click(function() {
+    	var delete_ids = findDeleteIds();
+    	
+    	console.log(delete_ids);
+    	
+    	if (delete_ids.length == 0) alert("You haven't choosen any row");
+    	else {
+    	
+    		var token = $("meta[name='_csrf']").attr("content");
+    		var header = $("meta[name='_csrf_header']").attr("content");
+    		$.ajax({
+    			type: 'POST',
+    			url: '/busroute/delete',
+    			contentType: "application/json; charset=utf-8",
+    			dataType: "json",
+    			data: JSON.stringify(delete_ids),
+    			traditional: true,
+    			beforeSend: function(xhr){
+    				xhr.setRequestHeader(header, token);
+    			},
+    			complete: function() {
+    		        window.location.replace("/");
+    		        alert("Delete successfully!");
+    		     }
+    		});
+    	}
+    	
     });
+});
+
+function findDeleteIds() {
+	var delete_ids = [];
+	var table = document.getElementById("table-busroute-today");
+	for(var i = 0, row; row = table.rows[i]; i++) {
+		var check_button  = row.getElementsByTagName("td")[row.cells.length - 1].getElementsByTagName('input')[0];
+		var first_cell = row.getElementsByTagName("td")[0];
+		
+		if (check_button.checked == true) delete_ids.push(parseInt(first_cell.textContent));
+	}
+	return delete_ids;
 }
 
 function showWelcomeLoginSuccess() {
@@ -53,4 +88,5 @@ var getUrlParameter = function getUrlParameter(sParam) {
         }
     }
 };
+
 
