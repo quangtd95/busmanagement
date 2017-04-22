@@ -74,13 +74,6 @@
 			<artifactId>thymeleaf-extras-springsecurity4</artifactId>
 		</dependency>
 
-		<!-- https://mvnrepository.com/artifact/org.projectlombok/lombok-maven -->
-		<dependency>
-			<groupId>org.projectlombok</groupId>
-			<artifactId>lombok</artifactId>
-			<version>1.16.14</version>
-			<scope>provided</scope>
-		</dependency>
 		
 		<dependency>
 			<groupId>org.webjars.bower</groupId>

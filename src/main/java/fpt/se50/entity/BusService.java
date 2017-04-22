@@ -10,9 +10,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 
-import lombok.Data;
-
-@Data
 @Entity
 @Table(name="bus_service")
 public class BusService {
@@ -29,6 +26,39 @@ public class BusService {
 	
 	@OneToMany(mappedBy="busService")
 	private Set<BusRoute> busRoutes;
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getPhoneNumber() {
+		return phoneNumber;
+	}
+
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
+	}
+
+	public Set<BusRoute> getBusRoutes() {
+		return busRoutes;
+	}
+
+	public void setBusRoutes(Set<BusRoute> busRoutes) {
+		this.busRoutes = busRoutes;
+	}
+	
 	
 	
 }

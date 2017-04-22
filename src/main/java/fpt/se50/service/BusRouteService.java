@@ -16,4 +16,6 @@ public interface BusRouteService {
 	void delete(int id);
 	
 	List<BusRoute> findAll();
+	
+	List<BusRoute> findBusRouteToday();
 }

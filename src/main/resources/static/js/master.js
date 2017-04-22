@@ -5,8 +5,18 @@ $(window).on("load resize ", function() {
 }).resize();
 
 $(document).ready(function () {
-    console.log('thís');
     if (getUrlParameter("true") != null) {
+        showWelcomeLoginSuccess();
+    }
+    editTableContent();
+});
+function editTableContent() {
+    $('#table-busroute-today > tbody  > tr').each(function(row) {
+        
+    });
+}
+
+function showWelcomeLoginSuccess() {
         swal(
             'Welcome!',
             'Đăng nhập thành công',
@@ -14,8 +24,7 @@ $(document).ready(function () {
         ).then(function () {
             location.href=location.href.replace("?true", "");
         });
-    }
-});
+}
 function logout() {
 	swal({
 		  title: 'Đăng xuất?',

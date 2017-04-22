@@ -33,5 +33,10 @@ public class BusRouteServiceImpl implements BusRouteService {
 	public List<BusRoute> findAll() {
 		return busRouteRepository.findAll();
 	}
+
+	@Override
+	public List<BusRoute> findBusRouteToday() {
+		return null;
+	}
 	
 }
