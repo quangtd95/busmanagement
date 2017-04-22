@@ -1,6 +1,11 @@
 package fpt.se50.service;
 
+import java.util.List;
+
+import org.springframework.stereotype.Service;
+
 import fpt.se50.entity.BusRoute;
+
 
 public interface BusRouteService {
 	
@@ -9,4 +14,6 @@ public interface BusRouteService {
 	void save(BusRoute busRoute);
 	
 	void delete(int id);
+	
+	List<BusRoute> findAll();
 }
