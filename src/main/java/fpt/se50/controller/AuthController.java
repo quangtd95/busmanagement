@@ -1,4 +1,4 @@
-package fpt.se50.controller.auth;
+package fpt.se50.controller;
 
 import java.util.List;
 

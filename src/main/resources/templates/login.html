@@ -1,91 +1,23 @@
+<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<th:block th:include="master::head"></th:block>
-<title>Đăng nhập</title>
+    <title>Đăng nhập</title>
+    <meta charset="utf-8"/>
+    <link rel="stylesheet" th:href="@{/css/login.css}" href="../static/css/login.css"/>
 </head>
 <body>
-	<div th:replace="master::header"></div>
-	<div th:replace="master::modal_contact"></div>
-	<div class="container">
-
-		<div class="row">
-			<div class="col-md-8 col-md-offset-2">
-				<div th:if="${success}"
-					class="row alert alert-success alert-dismissible">
-					<button type="button" class="close" data-dismiss="alert"
-						aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-					<span th:text="${success}"></span>
-				</div>
-				<div th:if="${param.error}"
-					class="row alert alert-danger alert-dismissible">
-					<button type="button" class="close" data-dismiss="alert"
-						aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-					<span>Sai email hoáº·c máº­t kháº©u</span>
-				</div>
-				<div th:if="${logout}"
-					class="row alert alert-info alert-dismissible">
-					<button type="button" class="close" data-dismiss="alert"
-						aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-					<span th:text="${logout}"></span>
-				</div>
-
-				<div class="panel panel-default">
-					<div class="panel-heading">Ä�Äƒng nháº­p</div>
-					<div class="panel-body">
-						<form class="form-horizontal" role="form" method="POST"
-							th:action="@{/login}">
-							<div class="form-group">
-								<label for="email" class="col-md-4 control-label">Ä�á»‹a
-									chá»‰ email</label>
-								<div class="col-md-6">
-									<input id="email" type="email" class="form-control"
-										name="email" value="" required="true" autofocus="true" /> <span
-										class="help-block"> <strong></strong>
-									</span>
-								</div>
-							</div>
-							<div class="form-group">
-								<label for="password" class="col-md-4 control-label">Máº­t
-									kháº©u</label>
-								<div class="col-md-6">
-									<input id="password" type="password" class="form-control"
-										name="password" required="true" /> <span class="help-block">
-										<strong></strong>
-									</span>
-								</div>
-							</div>
-
-							<div class="form-group">
-								<div class="col-md-6 col-md-offset-4">
-									<div class="checkbox">
-										<label> <input type="checkbox" name="remember" /> Ghi
-											nhá»›
-										</label>
-									</div>
-								</div>
-							</div>
-
-							<div class="form-group">
-								<div class="col-md-8 col-md-offset-4">
-									<button type="submit" class="btn btn-primary">Ä�Äƒng
-										nháº­p</button>
-
-									<a class="btn btn-link" href="{{ route('password.request') }}">
-										QuÃªn máº­t kháº©u? </a>
-								</div>
-							</div>
-						</form>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+<div class="body"></div>
+<div class="grad"></div>
+<div class="header">
+    <div>Benxe<span>DANANG</span></div>
+</div>
+<br/>
+<div class="login">
+    <form role="form" method="POST" th:action="@{/login}">
+        <input type="email" placeholder="email" name="email" autocomplete="off"/><br/>
+        <input type="password" placeholder="password" name="password" autocomplete="off"/><br/>
+        <input class="login-button" type="submit" value="Đăng nhập"/>
+    </form>
+</div>
 </body>
-<div th:replace="master::footer"></div>
 </html>
