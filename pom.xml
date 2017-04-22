@@ -81,6 +81,12 @@
 			<version>1.16.14</version>
 			<scope>provided</scope>
 		</dependency>
+		
+		<dependency>
+			<groupId>org.webjars.bower</groupId>
+			<artifactId>sweetalert2</artifactId>
+			<version>6.4.2</version>
+		</dependency>
 	</dependencies>
 
 	<build>
