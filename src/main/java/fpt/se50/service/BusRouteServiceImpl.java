@@ -15,7 +15,7 @@ public class BusRouteServiceImpl implements BusRouteService {
 
 	@Autowired
 	private BusRouteRepository busRouteRepository;
-	
+
 	@Override
 	public BusRoute findOne(int id) {
 		return busRouteRepository.findOne(id);
@@ -40,6 +40,7 @@ public class BusRouteServiceImpl implements BusRouteService {
 	public List<BusRoute> findBusRouteToday() {
 		return null;
 	}
+
 	@Override
 	public List<BusRoute> search(String source,String destination,String busServiceName) {
 		if (source==null) source = "";
@@ -56,5 +57,5 @@ public class BusRouteServiceImpl implements BusRouteService {
 		}
 		return list;
 	}
-	
+
 }

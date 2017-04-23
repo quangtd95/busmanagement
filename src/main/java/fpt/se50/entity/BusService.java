@@ -4,10 +4,13 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 
 @Entity
@@ -24,7 +27,8 @@ public class BusService {
 	@Column(name="PHONE")
 	private String phoneNumber;
 	
-	@OneToMany(mappedBy="busService")
+	@OneToMany(fetch=FetchType.LAZY,mappedBy="busService")
+	@JsonManagedReference
 	private Set<BusRoute> busRoutes;
 
 	public int getId() {
@@ -58,7 +62,5 @@ public class BusService {
 	public void setBusRoutes(Set<BusRoute> busRoutes) {
 		this.busRoutes = busRoutes;
 	}
-	
-	
 	
 }

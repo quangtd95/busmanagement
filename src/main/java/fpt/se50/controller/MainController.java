@@ -73,4 +73,5 @@ public class MainController {
 	    		busRouteService.delete(delete_ids[i].intValue());
 	    	return new ResponseEntity<String>("xóa tuyến xe thành công",HttpStatus.OK);
 	    }
+
 }
