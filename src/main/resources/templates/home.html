@@ -1,8 +1,11 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.springframework.org/security/tags">
 <head>
 <title>Trang chu</title>
 <meta charset="utf-8" />
+<meta th:name="_csrf" th:content="${_csrf.token}" />
+<meta th:name="_csrf_header" th:content="${_csrf.headerName}" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
@@ -15,11 +18,11 @@
 <script th:src="@{/webjars/sweetalert2/6.4.2/dist/sweetalert2.min.js}"
 	src="https://cdn.jsdelivr.net/sweetalert2/6.4.2/sweetalert2.min.js"></script>
 <!--  -->
-
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
 <script src="../static/js/master.js" th:src="@{/js/master.js}"></script>
 </head>
 <body id="bootstrap-overrides">
@@ -54,36 +57,44 @@
 				<h2>TUYẾN XE TRONG NGÀY</h2>
 			</CENTER>
 
-			<form class="navbar-form" id="home-search-form">
+			<form class="navbar-form" id="home-search-form" role="form" th:action="@{/search}">
 				<div class="input-group add-on">
 					<div class="form-group">
-						<input class="form-control" type="text" placeholder="Nơi đi" />
+						<input id="searchSource" class="form-control" type="text"
+							placeholder="Nơi đi" th:if="${param.source !=null}" th:value="${param.source[0]}" />
 					</div>
 					<div class="form-group">
-						<input class="form-control" type="text" placeholder="Nơi đến" />
+						<input id="searchDestination" class="form-control" type="text"
+							placeholder="Nơi đến"  th:if="${param.destination}!=null" th:value="${param.destination[0]}"/>
 					</div>
 					<div class="form-group">
-						<input class="form-control" type="text" placeholder="Nhà xe" />
+						<input id="searchBusService" class="form-control" type="text"
+							placeholder="Nhà xe"  th:if="${param.busService!=null}" th:value="${param.busService[0]}"/>
 					</div>
 					<div class="input-group-btn">
-						<a type="button" id="search-button" class="btn btn-defaut"> <i
-							class="glyphicon glyphicon-search" aria-hidden="true"></i>
-						</a>
+						<button type="submit" id="search-button" class="btn btn-defaut">
+							<i class="glyphicon glyphicon-search" aria-hidden="true"></i>
+						</button>
 					</div>
 				</div>
 			</form>
 
+
 			<div style="padding-top: 15px; padding-bottom: 15px">
-				<div class="home-container-button home-left">
-					<button type="button" class="button">Thêm</button>
-					<button type="button" class="button">Sửa</button>
-					<button type="button" class="button">Xóa</button>
-				</div>
+				<th:block sec:authorize="isAuthenticated()">
+					<div class="home-container-button home-left">
+						<button type="button" class="button">Thêm</button>
+						<button type="button" class="button">Sửa</button>
+						<button type="button" class="button">Xóa</button>
+					</div>
+				</th:block>
 				<div class="home-container-button home-right">
 					<button type="button" class="button">Hủy vé</button>
-					<div class="checkbox-inline">
-						<label><input type="checkbox" value="" />Chọn tất cả</label>
-					</div>
+					<th:block sec:authorize="isAuthenticated()">
+						<div class="checkbox-inline">
+							<label><input type="checkbox" value="" />Chọn tất cả</label>
+						</div>
+					</th:block>
 				</div>
 			</div>
 
@@ -103,188 +114,27 @@
 				</table>
 			</div>
 			<div class="table-content">
-				<table class="table table-hover">
+				<table class="table table-hover" id="table-busroute-today">
 					<tbody>
-						<tr>
-							<td>1</td>
-							<td>ABC<br />Tuyến: Đà Nẵng - Sài Gòn
-							</td>
-							<td>Bến xe TT Đà Nẵng<br />Giờ đi: 14:00<br />24/04/2017
-							</td>
-							<td>Bến xe Miền Đông<br />Giờ đến: 15:00<br />24/04/2017
-							</td>
-							<td>355.000đ<br />Còn 1 vé<br />
-								<button type="button" class="btn">Đặt vé</button>
-							</td>
-							<td>0511.3696969</td>
-							<td>
-								<div class="checkbox">
-									<label><input type="checkbox" value="" /></label>
-								</div>
-							</td>
-						</tr>
-						<tr>
-							<td>2</td>
-							<td>ABC<br />Tuyến: Đà Nẵng - Khánh Hòa
-							</td>
-							<td>Bến xe TT Đà Nẵng<br />Giờ đi: 19:00<br />24/04/2017
-							</td>
-							<td>Bến xe Khánh Hòa<br />Giờ đến: 20:00<br />24/04/2017
-							</td>
-							<td>255.000đ<br />Còn 1 vé<br />
-								<button type="button" class="btn">Đặt vé</button>
-							</td>
-							<td>0511.3696969</td>
-							<td>
-								<div class="checkbox">
-									<label><input type="checkbox" value="" /></label>
-								</div>
-							</td>
-						</tr>
-						<tr>
-							<td>3</td>
-							<td>WTF<br />Tuyến: Đà Nẵng - Sài Gòn
-							</td>
-							<td>Bến xe TT Đà Nẵng<br />Giờ đi: 14:00<br />24/04/2017
-							</td>
-							<td>Bến xe Miền Đông<br />Giờ đến: 15:00<br />24/04/2017
-							</td>
-							<td>355.000đ<br />Còn 1 vé<br />
-								<button type="button" class="btn">Đặt vé</button>
-							</td>
-							<td>0511.3696969</td>
-							<td>
-								<div class="checkbox">
-									<label><input type="checkbox" value="" /></label>
-								</div>
-							</td>
-						</tr>
-						<tr>
-							<td>4</td>
-							<td>ABC<br />Tuyến: Đà Nẵng - Khánh Hòa
-							</td>
-							<td>Bến xe TT Đà Nẵng<br />Giờ đi: 19:00<br />24/04/2017
-							</td>
-							<td>Bến xe Khánh Hòa<br />Giờ đến: 20:00<br />24/04/2017
-							</td>
-							<td>255.000đ<br />Còn 1 vé<br />
-								<button type="button" class="btn">Đặt vé</button>
-							</td>
-							<td>0511.3696969</td>
-							<td>
-								<div class="checkbox">
-									<label><input type="checkbox" value="" /></label>
-								</div>
-							</td>
-						</tr>
-						<tr>
-							<td>5</td>
-							<td>DEF<br />Tuyến: Đà Nẵng - Sài Gòn
-							</td>
-							<td>Bến xe TT Đà Nẵng<br />Giờ đi: 14:00<br />24/04/2017
-							</td>
-							<td>Bến xe Miền Đông<br />Giờ đến: 15:00<br />24/04/2017
-							</td>
-							<td>355.000đ<br />Còn 1 vé<br />
-								<button type="button" class="btn">Đặt vé</button>
-							</td>
-							<td>0511.3696969</td>
-							<td>
-								<div class="checkbox">
-									<label><input type="checkbox" value="" /></label>
-								</div>
-							</td>
-						</tr>
-						<tr>
-							<td>6</td>
-							<td>ASB<br />Tuyến: Đà Nẵng - Khánh Hòa
-							</td>
-							<td>Bến xe TT Đà Nẵng<br />Giờ đi: 19:00<br />24/04/2017
-							</td>
-							<td>Bến xe Khánh Hòa<br />Giờ đến: 20:00<br />24/04/2017
-							</td>
-							<td>255.000đ<br />Còn 1 vé<br />
-								<button type="button" class="btn">Đặt vé</button>
-							</td>
-							<td>0511.3696969</td>
-							<td>
-								<div class="checkbox">
-									<label><input type="checkbox" value="" /></label>
-								</div>
-							</td>
-						</tr>
-						<tr>
-							<td>6</td>
-							<td>ASB<br />Tuyến: Đà Nẵng - Khánh Hòa
-							</td>
-							<td>Bến xe TT Đà Nẵng<br />Giờ đi: 19:00<br />24/04/2017
-							</td>
-							<td>Bến xe Khánh Hòa<br />Giờ đến: 20:00<br />24/04/2017
-							</td>
-							<td>255.000đ<br />Còn 1 vé<br />
-								<button type="button" class="btn">Đặt vé</button>
-							</td>
-							<td>0511.3696969</td>
-							<td>
-								<div class="checkbox">
-									<label><input type="checkbox" value="" /></label>
-								</div>
-							</td>
-						</tr>
-						<tr>
-							<td>6</td>
-							<td>ASB<br />Tuyến: Đà Nẵng - Khánh Hòa
-							</td>
-							<td>Bến xe TT Đà Nẵng<br />Giờ đi: 19:00<br />24/04/2017
-							</td>
-							<td>Bến xe Khánh Hòa<br />Giờ đến: 20:00<br />24/04/2017
-							</td>
-							<td>255.000đ<br />Còn 1 vé<br />
-								<button type="button" class="btn">Đặt vé</button>
-							</td>
-							<td>0511.3696969</td>
-							<td>
-								<div class="checkbox">
-									<label><input type="checkbox" value="" /></label>
-								</div>
-							</td>
-						</tr>
-						<tr>
-							<td>6</td>
-							<td>ASB<br />Tuyến: Đà Nẵng - Khánh Hòa
-							</td>
-							<td>Bến xe TT Đà Nẵng<br />Giờ đi: 19:00<br />24/04/2017
-							</td>
-							<td>Bến xe Khánh Hòa<br />Giờ đến: 20:00<br />24/04/2017
-							</td>
-							<td>255.000đ<br />Còn 1 vé<br />
-								<button type="button" class="btn">Đặt vé</button>
-							</td>
-							<td>0511.3696969</td>
-							<td>
-								<div class="checkbox">
-									<label><input type="checkbox" value="" /></label>
-								</div>
-							</td>
-						</tr>
-						<tr>
-							<td>6</td>
-							<td>ASB<br />Tuyến: Đà Nẵng - Khánh Hòa
-							</td>
-							<td>Bến xe TT Đà Nẵng<br />Giờ đi: 19:00<br />24/04/2017
-							</td>
-							<td>Bến xe Khánh Hòa<br />Giờ đến: 20:00<br />24/04/2017
-							</td>
-							<td>255.000đ<br />Còn 1 vé<br />
-								<button type="button" class="btn">Đặt vé</button>
-							</td>
-							<td>0511.3696969</td>
-							<td>
-								<div class="checkbox">
-									<label><input type="checkbox" value="" /></label>
-								</div>
-							</td>
-						</tr>
+						<th:block th:each="busRoute , inerStats : ${busRoutes}">
+							<tr>
+								<td th:text="${inerStats.index} + 1"></td>
+								<td th:text="${busRoute.busService.name}"><br /></td>
+								<td><span th:text="${busRoute.source}"></span><br />Giờ đi:
+									<span th:text="${busRoute.departureTime}"></span><br /></td>
+								<td><span th:text="${busRoute.destination}"></span><br />Giờ
+									đến: <spam th:text="${busRoute.arrivalTime}"></spam> <br /></td>
+								<td><span th:text="${busRoute.ticketPrice}"></span>đ<br />Còn
+									<span th:text="${busRoute.remainingTickets}"></span> vé<br />
+									<button type="button" class="btn">Đặt vé</button></td>
+								<td><span th:text="${busRoute.busService.phoneNumber}"></span></td>
+								<td>
+									<div class="checkbox">
+										<label><input type="checkbox" value="" /></label>
+									</div>
+								</td>
+							</tr>
+						</th:block>
 					</tbody>
 				</table>
 			</div>
@@ -328,7 +178,8 @@
 						<li><a href="#">Sơ đồ nhà ga bán vé</a></li>
 						<li><a href="#">Liên hệ</a></li>
 						<th:block sec:authorize="hasRole('ROLE_ANONYMOUS')">
-							<li><a id="login" th:href="@{/login}" href="/login">Đăng nhập</a></li>
+							<li><a id="login" th:href="@{/login}" href="/login">Đăng
+									nhập</a></li>
 						</th:block>
 						<th:block sec:authorize="isAuthenticated()">
 							<li><a id="logout" onclick="logout()">Đăng xuất</a></li>
@@ -336,14 +187,7 @@
 
 					</ul>
 				</div>
-				<!-- <div class="col-md-3 col-sm-6 paddingtop-bottom">
-              <h6 class="heading7">LATEST POST</h6>
-              <div class="post">
-                <p>facebook crack the movie advertisment code:what it means for you <span>August 3,2015</span></p>
-                <p>facebook crack the movie advertisment code:what it means for you <span>August 3,2015</span></p>
-                <p>facebook crack the movie advertisment code:what it means for you <span>August 3,2015</span></p>
-              </div>
-            </div> -->
+
 				<div class="col-md-3 col-sm-6 paddingtop-bottom">
 					<div class="fb-page" data-href="https://www.facebook.com/facebook"
 						data-tabs="timeline" data-height="300" data-small-header="false"

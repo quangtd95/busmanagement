@@ -74,18 +74,21 @@
 			<artifactId>thymeleaf-extras-springsecurity4</artifactId>
 		</dependency>
 
-		<!-- https://mvnrepository.com/artifact/org.projectlombok/lombok-maven -->
-		<dependency>
-			<groupId>org.projectlombok</groupId>
-			<artifactId>lombok</artifactId>
-			<version>1.16.14</version>
-			<scope>provided</scope>
-		</dependency>
 		
 		<dependency>
 			<groupId>org.webjars.bower</groupId>
 			<artifactId>sweetalert2</artifactId>
 			<version>6.4.2</version>
+		</dependency>
+		
+			<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+
 		</dependency>
 	</dependencies>
 
