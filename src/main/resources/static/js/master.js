@@ -19,6 +19,7 @@ $(document).ready(function () {
     	
     		var token = $("meta[name='_csrf']").attr("content");
     		var header = $("meta[name='_csrf_header']").attr("content");
+
     		$.ajax({
     			type: 'POST',
     			url: '/busroute/delete',
@@ -29,9 +30,10 @@ $(document).ready(function () {
     			beforeSend: function(xhr){
     				xhr.setRequestHeader(header, token);
     			},
-    			complete: function() {
+    			complete: function(data) {
     		        window.location.replace("/");
-    		        alert("Delete successfully!");
+                    console.log(data);
+    		        alert(data.responseText);
     		     }
     		});
     	}
