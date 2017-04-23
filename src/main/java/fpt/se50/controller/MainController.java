@@ -34,7 +34,7 @@ public class MainController {
 			System.out.println(source+" "+destination+" "+busService);
 			System.out.println(busRoutes.size());
 			model.addAttribute("busRoutes", busRoutes);
-			return "home";
+			return "index";
 			
 		}
 	   
@@ -43,7 +43,7 @@ public class MainController {
 	    public String create(Model model) {
 	        model.addAttribute("create-form");
 	        model.addAttribute("busRoute", new BusRoute());
-	        return "home";
+	        return "index";
 	    }
 	   
 	    // Sửa tuyến xe - Lấy object từ db gửi lên cho edit-form
@@ -51,7 +51,7 @@ public class MainController {
 	    public String edit(@PathVariable int id, Model model) {
 	        model.addAttribute("edit-form");
 	        model.addAttribute("busRoute", busRouteService.findOne(id));
-	        return "home";
+	        return "index";
 	    }
 	   
 	    // Lưu tuyến xe: kết quả trả về từ create-form hoặc edit-form
@@ -59,11 +59,11 @@ public class MainController {
 	    public String save(@Valid BusRoute busRoute, BindingResult result, RedirectAttributes redirect) {
 	        if (result.hasErrors()) {
 	            redirect.addFlashAttribute("unsuccess", "Saved bus route unsuccessfully!");
-	            return "redirect:/home";
+	            return "redirect:/index";
 	        }
 	        busRouteService.save(busRoute);
 	        redirect.addFlashAttribute("success", "Saved bus route successfully!");
-	        return "redirect:/home";
+	        return "redirect:/index";
 	    }
 	    
 	    // Xoá tuyến xe
