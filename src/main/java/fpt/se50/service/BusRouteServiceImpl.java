@@ -1,19 +1,29 @@
 package fpt.se50.service;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import fpt.se50.entity.BusRoute;
+import fpt.se50.entity.BusService;
 import fpt.se50.repository.BusRouteRepository;
+import fpt.se50.repository.BusServiceRepository;
 
 @Service
 public class BusRouteServiceImpl implements BusRouteService {
 
 	@Autowired
 	private BusRouteRepository busRouteRepository;
-	
+
+	@Autowired
+	private BusServiceRepository busServiceRepository;
+
 	@Override
 	public BusRoute findOne(int id) {
 		return busRouteRepository.findOne(id);
@@ -38,5 +48,22 @@ public class BusRouteServiceImpl implements BusRouteService {
 	public List<BusRoute> findBusRouteToday() {
 		return null;
 	}
-	
+
+	@Override
+	public List<BusRoute> search(String source,String destination,String busServiceName) {
+		if (source==null) source = "";
+		if (destination==null) destination = "";
+		if (busServiceName==null) busServiceName = "";
+		List<BusRoute> busRoutes =busRouteRepository.findBySourceContainingAndDestinationContaining(source,destination); 
+		Iterator<BusRoute> iterator  =busRoutes.iterator();
+		List<BusRoute> list = new ArrayList<>();
+		while(iterator.hasNext()){
+			BusRoute busRoute= iterator.next();
+			if (busRoute.getBusService().getName().contains(busServiceName)){
+				list.add(busRoute);
+			}
+		}
+		return list;
+	}
+
 }

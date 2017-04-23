@@ -12,6 +12,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 
 @Entity
 @Table(name="bus_route")
@@ -44,6 +46,7 @@ public class BusRoute {
 	
 	@ManyToOne
 	@JoinColumn(name="BUS_SERVICE_ID")
+	@JsonBackReference
 	private BusService busService;
 		
 	@OneToMany(mappedBy="busRoute")
@@ -143,5 +146,6 @@ public class BusRoute {
 		this.tickets = tickets;
 	}	
 	
+
 	
 }

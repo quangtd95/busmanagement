@@ -6,13 +6,20 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import fpt.se50.entity.BusRoute;
 import fpt.se50.service.BusRouteService;
@@ -24,11 +31,14 @@ public class MainController {
 	private BusRouteService busRouteService;
 	
 	 @GetMapping("/")
-	    public String getHome(Model model) {
-	        List<BusRoute> busRoutes = busRouteService.findAll();
-	        model.addAttribute("busRoutes", busRoutes);
-	        return "home";
-	    }
+		public String getSearch(@RequestParam(required=false) String source,@RequestParam(required=false) String destination, @RequestParam(required=false) String busService,Model model){
+			List<BusRoute> busRoutes = busRouteService.search(source,destination,busService);
+			System.out.println(source+" "+destination+" "+busService);
+			System.out.println(busRoutes.size());
+			model.addAttribute("busRoutes", busRoutes);
+			return "home";
+			
+		}
 	   
 	    // Thêm tuyến xe - Gửi object lên cho create-form  
 	    @GetMapping("/busroute/create")
@@ -57,4 +67,6 @@ public class MainController {
 	        redirect.addFlashAttribute("success", "Saved bus route successfully!");
 	        return "redirect:/home";
 	    }
+	    
+	   
 }
