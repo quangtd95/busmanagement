@@ -2,6 +2,16 @@
 <html xmlns:th="http://www.thymeleaf.org"
 	xmlns:sec="http://www.springframework.org/security/tags">
 <head>
+<<<<<<< HEAD
+    <title>Trang chu</title>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta th:name="_csrf" th:content="${_csrf.token}"/>
+    <meta th:name="_csrf_header" th:content="${_csrf.headerName}"/>
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="css/index.css"/>
+=======
 <title>Trang chu</title>
 <meta charset="utf-8" />
 <meta th:name="_csrf" th:content="${_csrf.token}" />
@@ -10,6 +20,7 @@
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
 <link rel="stylesheet" href="css/index.css" />
+>>>>>>> 32ded47b0188936d725c908169ca03270c26035c
 
 <!-- SweetAlert2 -->
 <link rel="stylesheet"
@@ -23,6 +34,28 @@
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
+<<<<<<< HEAD
+    <script
+            src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+    <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/json2/20160511/json2.js"></script>
+    <script
+            src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="../static/js/master.js" th:src="@{/js/master.js}"></script>
+</head>
+<body id="bootstrap-overrides">
+<!--  -->
+<main>
+    <nav class="navbar navbar-default" role="navigation"
+         style="background-color: #63B175;">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand home-navbar-brand" th:href="@{/}">Bến Xe Đà
+                    Nẵng</a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li class="active" style="color: #fff"><a href="#">Home</a></li>
+=======
 <script src="../static/js/master.js" th:src="@{/js/master.js}"></script>
 </head>
 <body id="bootstrap-overrides">
@@ -37,6 +70,7 @@
 			</div>
 			<ul class="nav navbar-nav">
 				<li class="active" style="color: #fff"><a href="#">Home</a></li>
+>>>>>>> 32ded47b0188936d725c908169ca03270c26035c
 
 				<li class="dropdown"><a class="dropdown-toggle"
 					data-toggle="dropdown" href="#" style="color: #fff">Giới thiệu<span
@@ -57,6 +91,137 @@
 				<h2>TUYẾN XE TRONG NGÀY</h2>
 			</CENTER>
 
+<<<<<<< HEAD
+            <form class="navbar-form" id="home-search-form" role="form" th:action="@{/search}">
+                <div class="input-group add-on">
+                    <div class="form-group">
+                        <th:block th:if="${param.source ==  null}">
+                            <input id="searchSource" class="form-control" type="text"
+                                   placeholder="Nơi đi"/>
+                        </th:block>
+                        <th:block th:if="${param.source != null}">
+                            <input id="searchSource" class="form-control" type="text"
+                                   placeholder="Nơi đi" th:value="${param.source[0]}"/>
+                        </th:block>
+                    </div>
+                    <div class="form-group">
+                        <th:block th:if="${param.destination == null}">
+                            <input id="searchDestination" class="form-control" type="text"
+                                   placeholder="Nơi đến"/>
+                        </th:block>
+                        <th:block th:if="${param.destination != null}">
+                            <input id="searchDestination" class="form-control" type="text"
+                                   placeholder="Nơi đến" th:value="${param.destination[0]}"/>
+                        </th:block>
+                    </div>
+                    <div class="form-group">
+                        <th:block th:if="${param.busService == null}">
+                            <input id="searchBusService" class="form-control" type="text"
+                                   placeholder="Nhà xe"/>
+                        </th:block>
+                        <th:block th:if="${param.busService!=null}">
+                            <input id="searchBusService" class="form-control" type="text"
+                                   placeholder="Nhà xe" th:value="${param.busService[0]}"/>
+                        </th:block>
+                    </div>
+                    <div class="input-group-btn">
+                        <button type="submit" id="search-button" class="btn btn-defaut">
+                            <i class="glyphicon glyphicon-search" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                </div>
+            </form>
+
+
+            <div style="padding-top: 15px; padding-bottom: 15px">
+                <th:block sec:authorize="isAuthenticated()">
+                    <div class="home-container-button home-left">
+                        <button type="button" class="button">Thêm</button>
+                        <button type="button" class="button">Sửa</button>
+                        <button id="delete-button" type="button" class="button">Xóa</button>
+                    </div>
+                </th:block>
+                <div class="home-container-button home-right">
+                    <button type="button" class="button">Hủy vé</button>
+                    <th:block sec:authorize="isAuthenticated()">
+                        <div class="checkbox-inline">
+                            <label><input type="checkbox" value=""/>Chọn tất cả</label>
+                        </div>
+                    </th:block>
+                </div>
+            </div>
+
+            <div class="table-header">
+                <table class="table table-hover">
+                    <thead>
+                    <tr>
+                        <th>STT</th>
+                        <th>Nhà xe</th>
+                        <th>Nơi đi</th>
+                        <th>Nơi đến</th>
+                        <th>Giá tiền</th>
+                        <th>Liên hệ</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                </table>
+            </div>
+            <div class="table-content">
+                <table class="table table-hover" id="table-busroute-today">
+                    <tbody>
+                    <th:block th:each="busRoute , inerStats : ${busRoutes}">
+                        <tr>
+                            <td style="display:none" th:text="${busRoute.id}"></td>
+                            <td th:text="${inerStats.index} + 1"></td>
+                            <td th:text="${busRoute.busService.name}"><br/></td>
+                            <td><span th:text="${busRoute.source}"></span><br/>Giờ đi: <span
+                                    th:text="${busRoute.departureTime}"></span><br/></td>
+                            <td><span th:text="${busRoute.destination}"></span><br/>Giờ đến:
+                                <spam
+                                        th:text="${busRoute.arrivalTime}"></spam>
+                                <br/></td>
+                            <td><span th:text="${busRoute.ticketPrice}"></span>đ<br/>Còn <span
+                                    th:text="${busRoute.remainingTickets}"></span> vé<br/>
+                                <button type="button" class="btn">Đặt vé</button>
+                            </td>
+                            <td><span th:text="${busRoute.busService.phoneNumber}"></span></td>
+                            <td>
+                                <div class="checkbox">
+                                    <label><input type="checkbox" value=""/></label>
+                                </div>
+                            </td>
+                        </tr>
+                    </th:block>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</main>
+<footer>
+    <div class="container footer-container">
+        <div class="row">
+            <div class="col-md-4 col-sm-6 footerleft ">
+                <div class="logofooter">LIÊN HỆ</div>
+                <div class="logofooter">
+                    <hr/>
+                </div>
+                <p>CÔNG TY CỔ PHẦN VẬN TẢI VÀ QUẢN LÝ BẾN XE ĐÀ NẴNG</p>
+                <p>
+                    <i class="fa fa-map-pin"></i>Địa chỉ: Phường Hoà An - Quận Cẩm Lệ
+                    - TP. Đà Nẵng
+                </p>
+                <p>
+                    <i class="fa fa-phone"></i>Điện thoại: 0511.3767428. Fax:
+                    0511.3680717
+                </p>
+                <p>
+                    <i class="fa fa-phone"></i>Đặt vé: 0511.3767679 - 3767678
+                </p>
+                <p>
+                    <i class="fa fa-envelope"></i>E-mail: info@benxetrungtamdanang.vn
+                </p>
+=======
 			<form class="navbar-form" id="home-search-form" role="form" th:action="@{/search}">
 				<div class="input-group add-on">
 					<div class="form-group">
@@ -164,6 +329,7 @@
 					<p>
 						<i class="fa fa-envelope"></i>E-mail: info@benxetrungtamdanang.vn
 					</p>
+>>>>>>> 32ded47b0188936d725c908169ca03270c26035c
 
 				</div>
 				<div class="col-md-2 col-sm-6 paddingtop-bottom">

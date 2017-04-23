@@ -1,6 +1,5 @@
 package fpt.se50.service;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -8,21 +7,14 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-
 import fpt.se50.entity.BusRoute;
-import fpt.se50.entity.BusService;
 import fpt.se50.repository.BusRouteRepository;
-import fpt.se50.repository.BusServiceRepository;
 
 @Service
 public class BusRouteServiceImpl implements BusRouteService {
 
 	@Autowired
 	private BusRouteRepository busRouteRepository;
-
-	@Autowired
-	private BusServiceRepository busServiceRepository;
 
 	@Override
 	public BusRoute findOne(int id) {

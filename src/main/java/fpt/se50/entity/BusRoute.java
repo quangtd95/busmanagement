@@ -52,8 +52,6 @@ public class BusRoute {
 	@OneToMany(mappedBy="busRoute")
 	private Set<Ticket> tickets;
 	
-	
-	
 	public int getId() {
 		return id;
 	}

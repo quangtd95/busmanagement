@@ -16,10 +16,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 import fpt.se50.entity.BusRoute;
 import fpt.se50.service.BusRouteService;
@@ -68,5 +66,12 @@ public class MainController {
 	        return "redirect:/home";
 	    }
 	    
-	   
+	    // Xoá tuyến xe
+	    @PostMapping("/busroute/delete")
+	    public @ResponseBody ResponseEntity<String> delete(@RequestBody Integer[] delete_ids) {
+	    	for(int i = 0; i < delete_ids.length; i++)
+	    		busRouteService.delete(delete_ids[i].intValue());
+	    	return new ResponseEntity<String>("xóa tuyến xe thành công",HttpStatus.OK);
+	    }
+
 }
