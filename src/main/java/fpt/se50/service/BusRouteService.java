@@ -18,4 +18,6 @@ public interface BusRouteService {
 	List<BusRoute> findAll();
 	
 	List<BusRoute> findBusRouteToday();
+	
+	List<BusRoute> search(String source,String destination,String busService);
 }

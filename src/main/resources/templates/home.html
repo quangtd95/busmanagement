@@ -4,8 +4,8 @@
     <title>Trang chu</title>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <meta th:name="_csrf" th:content="${_csrf.token}" />
-	<meta th:name="_csrf_header" th:content="${_csrf.headerName}" />
+    <meta th:name="_csrf" th:content="${_csrf.token}"/>
+    <meta th:name="_csrf_header" th:content="${_csrf.headerName}"/>
     <link rel="stylesheet"
           href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="css/index.css"/>
@@ -20,7 +20,7 @@
 
     <script
             src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
-    <script 
+    <script
             src="https://cdnjs.cloudflare.com/ajax/libs/json2/20160511/json2.js"></script>
     <script
             src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -33,7 +33,7 @@
          style="background-color: #63B175;">
         <div class="container-fluid">
             <div class="navbar-header">
-                <a class="navbar-brand home-navbar-brand" href="#">Bến Xe Đà
+                <a class="navbar-brand home-navbar-brand" th:href="@{/}">Bến Xe Đà
                     Nẵng</a>
             </div>
             <ul class="nav navbar-nav">
@@ -59,21 +59,42 @@
                 <h2>TUYẾN XE TRONG NGÀY</h2>
             </CENTER>
 
-            <form class="navbar-form" id="home-search-form">
+            <form class="navbar-form" id="home-search-form" role="form" th:action="@{/search}">
                 <div class="input-group add-on">
                     <div class="form-group">
-                        <input class="form-control" type="text" placeholder="Nơi đi"/>
+                        <th:block th:if="${param.source ==  null}">
+                            <input id="searchSource" class="form-control" type="text"
+                                   placeholder="Nơi đi"/>
+                        </th:block>
+                        <th:block th:if="${param.source != null}">
+                            <input id="searchSource" class="form-control" type="text"
+                                   placeholder="Nơi đi" th:value="${param.source[0]}"/>
+                        </th:block>
                     </div>
                     <div class="form-group">
-                        <input class="form-control" type="text" placeholder="Nơi đến"/>
+                        <th:block th:if="${param.destination == null}">
+                            <input id="searchDestination" class="form-control" type="text"
+                                   placeholder="Nơi đến"/>
+                        </th:block>
+                        <th:block th:if="${param.destination != null}">
+                            <input id="searchDestination" class="form-control" type="text"
+                                   placeholder="Nơi đến" th:value="${param.destination[0]}"/>
+                        </th:block>
                     </div>
                     <div class="form-group">
-                        <input class="form-control" type="text" placeholder="Nhà xe"/>
+                        <th:block th:if="${param.busService == null}">
+                            <input id="searchBusService" class="form-control" type="text"
+                                   placeholder="Nhà xe"/>
+                        </th:block>
+                        <th:block th:if="${param.busService!=null}">
+                            <input id="searchBusService" class="form-control" type="text"
+                                   placeholder="Nhà xe" th:value="${param.busService[0]}"/>
+                        </th:block>
                     </div>
                     <div class="input-group-btn">
-                        <a type="button" id="search-button" class="btn btn-defaut"> <i
-                                class="glyphicon glyphicon-search" aria-hidden="true"></i>
-                        </a>
+                        <button type="submit" id="search-button" class="btn btn-defaut">
+                            <i class="glyphicon glyphicon-search" aria-hidden="true"></i>
+                        </button>
                     </div>
                 </div>
             </form>
@@ -117,7 +138,7 @@
                     <tbody>
                     <th:block th:each="busRoute , inerStats : ${busRoutes}">
                         <tr>
-                        	<td style="display:none" th:text="${busRoute.id}"></td>
+                            <td style="display:none" th:text="${busRoute.id}"></td>
                             <td th:text="${inerStats.index} + 1"></td>
                             <td th:text="${busRoute.busService.name}"><br/></td>
                             <td><span th:text="${busRoute.source}"></span><br/>Giờ đi: <span

@@ -15,7 +15,7 @@
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>1.5.2.RELEASE</version>
-		<relativePath/> <!-- lookup parent from repository -->
+		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 
 	<properties>
@@ -74,13 +74,22 @@
 			<artifactId>thymeleaf-extras-springsecurity4</artifactId>
 		</dependency>
 
-		
+
 		<dependency>
 			<groupId>org.webjars.bower</groupId>
 			<artifactId>sweetalert2</artifactId>
 			<version>6.4.2</version>
 		</dependency>
+		
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
 
+		</dependency>
 	</dependencies>
 
 	<build>

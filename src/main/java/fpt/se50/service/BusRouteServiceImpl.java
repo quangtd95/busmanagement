@@ -1,5 +1,7 @@
 package fpt.se50.service;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +39,22 @@ public class BusRouteServiceImpl implements BusRouteService {
 	@Override
 	public List<BusRoute> findBusRouteToday() {
 		return null;
+	}
+	@Override
+	public List<BusRoute> search(String source,String destination,String busServiceName) {
+		if (source==null) source = "";
+		if (destination==null) destination = "";
+		if (busServiceName==null) busServiceName = "";
+		List<BusRoute> busRoutes =busRouteRepository.findBySourceContainingAndDestinationContaining(source,destination); 
+		Iterator<BusRoute> iterator  =busRoutes.iterator();
+		List<BusRoute> list = new ArrayList<>();
+		while(iterator.hasNext()){
+			BusRoute busRoute= iterator.next();
+			if (busRoute.getBusService().getName().contains(busServiceName)){
+				list.add(busRoute);
+			}
+		}
+		return list;
 	}
 	
 }

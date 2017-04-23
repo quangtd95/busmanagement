@@ -1,4 +1,3 @@
-
 $(window).on("load resize ", function() {
   var scrollWidth = $('.tbl-content').width() - $('.tbl-content table').width();
   $('.tbl-header').css({'padding-right':scrollWidth});
@@ -8,7 +7,19 @@ $(document).ready(function () {
     if (getUrlParameter("true") != null) {
         showWelcomeLoginSuccess();
     }
-    
+
+    $("#home-search-form").submit(function (event) {
+        event.preventDefault();
+        myUrl = window.location.pathname;
+        myUrl +='?source=';
+        myUrl +=$('#searchSource').val(),
+            myUrl +='&destination=';
+        myUrl +=$('#searchDestination').val(),
+            myUrl +='&busService=';
+        myUrl +=$('#searchBusService').val(),
+        window.location.replace(myUrl);
+    });
+
     $('#delete-button').click(function() {
     	var delete_ids = findDeleteIds();
     	
