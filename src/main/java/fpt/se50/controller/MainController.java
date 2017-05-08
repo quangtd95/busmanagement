@@ -1,6 +1,9 @@
 package fpt.se50.controller;
 
 
+import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -19,14 +22,20 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import fpt.se50.entity.AddBusRoute;
 import fpt.se50.entity.BusRoute;
+import fpt.se50.entity.BusService;
 import fpt.se50.service.BusRouteService;
+import fpt.se50.service.BusServiceService;
 
 @Controller
 public class MainController {
 	
 	@Autowired
 	private BusRouteService busRouteService;
+	
+	@Autowired
+	private BusServiceService busSvSv;
 	
 	 @GetMapping("/")
 		public String getSearch(@RequestParam(required=false) String source,@RequestParam(required=false) String destination, @RequestParam(required=false) String busService,Model model){
@@ -37,13 +46,38 @@ public class MainController {
 			return "index";
 			
 		}
-	   
-	    // Thêm tuyến xe - Gửi object lên cho create-form  
-	    @GetMapping("/busroute/create")
-	    public String create(Model model) {
-	        model.addAttribute("create-form");
-	        model.addAttribute("busRoute", new BusRoute());
-	        return "index";
+	    
+	    // Thêm tuyến xe
+	    @PostMapping("/busroute/add")
+	    public @ResponseBody ResponseEntity<String> add(@RequestBody AddBusRoute addBusRoute ) {
+	    	
+	    	BusRoute busRoute = new BusRoute();
+	    	busRoute.setSource(addBusRoute.getSource());
+	    	busRoute.setDestination(addBusRoute.getDestination() + "-"
+	    						+ addBusRoute.getBusServiceDestination());
+//	    	String format = "2011-01-18 00:00:00.0";
+	    	try {
+				Date departure = (Date) new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.S")
+						.parse(addBusRoute.getDepartureDate() + " "
+								+addBusRoute.getDepartureTime());
+				Date arrival = (Date) new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.S")
+						.parse(addBusRoute.getArrivalDate() + " "
+								+addBusRoute.getArrivalTime());
+				
+				busRoute.setDepartureTime(departure);
+				busRoute.setArrivalTime(arrival);
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
+	    	
+	    	busRoute.setRemainingTickets(Integer.parseInt(addBusRoute.getRemainingTicket()));
+	    	busRoute.setTotalTickets(Integer.parseInt(addBusRoute.getTotalTickets()));
+	    	busRoute.setTicketPrice(Integer.parseInt(addBusRoute.getTicketPrice()));
+	    	BusService busSv = busSvSv.findByName(addBusRoute.getBusService());
+	    	if (busSv != null)
+	    		busRoute.setBusService(busSv);
+	    	
+	    	return new ResponseEntity<String>("Thêm tuyến xe thành công",HttpStatus.OK);
 	    }
 	   
 	    // Sửa tuyến xe - Lấy object từ db gửi lên cho edit-form

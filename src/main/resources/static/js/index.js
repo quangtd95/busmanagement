@@ -57,14 +57,22 @@ $(document).ready(function () {
 
             /////////////EVENT////////////////////
             $("#home-dialog-add-btn").on('click',function(){
-                var data= {
-                    destination:$("#home-dialog-destination").val();
-                    busServiceDestination:
-                    busService:$("#home-dialog-bus-service").val();
-                    departureTime: 
-                    arrivalTime:
-                    ticket
+            	  var token = $("meta[name='_csrf']").attr("content");
+                  var header = $("meta[name='_csrf_header']").attr("content");
 
+                var data= {
+                	source: "Đà Nẵng-Bến xe TT Đà nẵng",
+                    destination:$("#home-dialog-destination").val(),
+                    busServiceDestination: $("home-dialog-bus-service-destination").val(),
+                    busService:$("#home-dialog-bus-service").val(),
+                    departureTime: $("home-dialog-departure-time").val(),
+                    departureDate: "",
+                    arrivalTime: $("home-dialog-arrival-time").val(),
+                    arrivalDate: "",
+                    ticketPrice: $("home-dialog-ticket-price").val(),
+                    totalTickets: "",
+                    remainingTicket: $("home-dialog-remaining-ticket").val(),
+                    contact: $("home-dialog-contact").val()
                 };
             $.ajax({
                 type: 'POST',
@@ -76,7 +84,7 @@ $(document).ready(function () {
                 beforeSend: function(xhr){
                     xhr.setRequestHeader(header, token);
                 },
-                complete: function(data) {
+                success: function(data) {
                     
                     console.log(data);
                     swal({
@@ -87,6 +95,9 @@ $(document).ready(function () {
                             window.location.replace("/");
                         })
 
+                },
+                error:function(data){
+                	alert(data.responseText);
                 }
             });
             });
