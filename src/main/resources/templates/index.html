@@ -25,6 +25,8 @@
     <script
             src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="../static/js/index.js" th:src="@{/js/index.js}"></script>
+
+    <link rel="stylesheet" href="../static/css/themtuyenxe.css" th:href="@{/css/themtuyenxe.css}"/>
 </head>
 <body id="bootstrap-overrides">
 <!--  -->
@@ -103,9 +105,9 @@
             <div style="padding-top: 15px; padding-bottom: 15px">
                 <th:block sec:authorize="isAuthenticated()">
                     <div class="home-container-button home-left">
-                        <button type="button" class="button">Thêm</button>
-                        <button type="button" class="button">Sửa</button>
-                        <button id="delete-button" type="button" class="button">Xóa</button>
+                        <button type="button"  id="home-add-bus-route-btn" class="button">Thêm</button>
+                        <button type="button"  id="home-edit-bus-route-btn" class="button">Sửa</button>
+                        <button  id="home-delete-bus-route-btn" type="button" class="button">Xóa</button>
                     </div>
                 </th:block>
                 <div class="home-container-button home-right">
@@ -164,6 +166,93 @@
             </div>
         </div>
     </div>
+        <div id="home-dialog" class="dialog">
+                    <div class="dialog-overlay"></div>
+                    <div class="dialog-content">
+                        <div id="delete-bus-route">
+                            <h4></h4>
+                        </div>
+
+                        <div id="add-bus-route">
+                            <form class="navbar-form">
+                                <span class="form-field-name">Tuyến</span>
+                                <div class="input-group add-on">
+                                    <div class="form-group">
+                                        <input class="form-control" type="text" placeholder="ĐÀ NẴNG" disabled="true"/>
+                                    </div>
+                                    <div class="form-group">
+                                        <input class="form-control" type="text" placeholder="Nơi đến" id="home-dialog-destination"/>
+                                    </div>
+                                </div>
+
+                                <br/>
+                                <span class="form-field-name">Nhà xe</span>
+                                <div class="input-group add-on">
+                                    <div class="form-group">
+                                        <input class="form-control" type="text" placeholder="Nhà xe" id="home-dialog-bus-service"/>
+                                    </div>
+                                </div>
+
+                                <br/>
+                                <span class="form-field-name">Giờ đi</span>
+                                <div class="input-group add-on">
+                                    <div class="form-group">
+                                        <input class="form-control" type="text" placeholder="Giờ đi" id="home-dialog-departure-time"/>
+                                    </div>
+                                </div>
+
+                                <br/>
+                                <span class="form-field-name">Bến đến</span>
+                                <div class="input-group add-on">
+                                    <div class="form-group">
+                                        <input class="form-control" type="text" placeholder="Bến xe" id="home-dialog-bus-service-destination"/>
+                                    </div>
+                                </div>
+
+                                <br/>
+                                <span class="form-field-name">Giờ đến</span>
+                                <div class="input-group add-on">
+                                    <div class="form-group">
+                                        <input class="form-control" type="text" placeholder="Giờ đến" id="home-dialog-arrival-time"/>
+                                    </div>
+                                </div>
+
+                                <br/>
+                                <span class="form-field-name">Giá tiền</span>
+                                <div class="input-group add-on">
+                                    <div class="form-group">
+                                        <input class="form-control" type="text" placeholder="Giá tiền" id="home-dialog-ticket-price"/>
+                                    </div>
+                                </div>
+
+                                <br/>
+                                <span class="form-field-name">Số vé còn lại</span>
+                                <div class="input-group add-on">
+                                    <div class="form-group">
+                                        <input class="form-control" type="text" id="home-dialog-remaining-ticket"/>
+                                    </div>
+                                </div>
+
+                                <br/>
+                                <span class="form-field-name">Liên hệ</span>
+                                <div class="input-group add-on">
+                                    <div class="form-group">
+                                        <input class="form-control" type="text" placeholder="Số điện thoại" id="home-dialog-contact"/>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+
+                        <div>
+                            <a href="#" class="btn" id="home-dialog-add-btn">Thêm</a>
+                            <a href="#" class="btn" id="home-dialog-edit-btn">Sửa</a>
+                            <a href="#" class="btn" id="home-dialog-delete-btn">Xóa</a>
+                            <a href="#" class="btn home-dialog-close" id="home-dialog-cancel-btn">Huỷ</a>
+                            <a href="#" class="btn home-dialog-close" id="home-dialog-ok-btn">OK</a>
+                        </div>
+                    </div>
+                </div>
+
 </main>
 <footer>
     <div class="container footer-container">

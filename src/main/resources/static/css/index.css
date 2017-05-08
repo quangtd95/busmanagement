@@ -31,7 +31,6 @@
   font-style: normal;
   font-weight: 400;
   font-size: 18px;
-  /*src: local("Raleway"), local("Raleway-Regular"), url("https://fonts.gstatic.com/s/raleway/v11/0dTEPzkLWceF7z0koJaX1A.woff2") format("woff2");*/
   unicode-range: U+0-FF, U+131, U+152-153, U+2C6, U+2DA, U+2DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215;
 }
 
@@ -39,10 +38,31 @@
   margin-bottom: 0px;
 }
 
-.navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:focus, .navbar-default .navbar-nav>.active>a:hover{
+#bootstrap-overrides .navbar-nav>.active>a, .navbar-nav>.active>a:focus{
   color: #fff;
   background-color: #4e9359;
 }
+
+#bootstrap-overrides .navbar-nav li a:hover, .navbar-nav li a:focus, .navbar-nav li:focus{
+  color: #fff;
+  background-color: #535353;
+}
+
+#bootstrap-overrides .navbar-nav>.open>a, .navbar-nav>.open>a:focus, .navbar-nav>.open>a:hover {
+  color: #fff;
+  background-color: #535353;
+}
+
+#bootstrap-overrides .dropdown-menu li a:hover, .dropdown-menu li a:focus {
+  color: #63B175;
+  background-color: #535353;
+}
+
+#bootstrap-overrides .dropdown-menu, .dropdown-menu li a {
+  color: #fff;
+  background-color: #535353;
+}
+
 
 .menu-text {
   margin: 10px auto;
@@ -54,10 +74,11 @@ main {
   font-family: "LatoRegular", sans-serif;
   font-size: 16px;
   background-color: #EFEFEF;
+  background-image: url("../images/trangchu_bg.jpg");
 }
 
 .container {
-  /*background-color: #fff;*/
+  background-color: rgba(255,255,255,0.9);
   padding-left: 30px;
   padding-right: 30px;
 }
@@ -86,7 +107,15 @@ main {
   text-align: right;
 }
 
-footer { background-color:#0c1a1e; min-height: 100px; position: static; bottom: 0; width: 100%;}
+footer { 
+  font-family: "LatoRegular", sans-serif;
+  background-color: #323232;
+  min-height: 100px;
+  position: static;
+  bottom: 0; 
+  width: 100%;
+  padding-bottom: 10px;
+}
 .footerleft { margin-top:50px; padding:0 36px; }
 .logofooter { margin-bottom:10px; font-size:25px; color:#fff; font-weight:700;}
 
@@ -117,22 +146,22 @@ footer { background-color:#0c1a1e; min-height: 100px; position: static; bottom: 
 
 .table-header{
   background-color: rgba(100,100,100,0.3);
- }
+}
 .table-content{
-  height: 600px;
+  /*height: 600px;*/
   overflow-x:auto;
   margin-top: 0px;
   border: 1px solid rgba(255,255,255,0.3);
 }
 
 ::-webkit-scrollbar {
-    width: 6px;
+  width: 6px;
 }
 ::-webkit-scrollbar-track {
-    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
 } 
 ::-webkit-scrollbar-thumb {
-    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
 }
 
 #search-button{
@@ -142,32 +171,86 @@ footer { background-color:#0c1a1e; min-height: 100px; position: static; bottom: 
 }
 
 #search-button:hover{
-    border: 1px solid;
-    box-shadow: inset 0 0 20px rgba(200, 255, 255, .5), 0 0 20px rgba(255, 255, 255, .2);
-    outline-color: rgba(255, 255, 255, 0);
-    outline-offset: 15px;
-    text-shadow: 1px 1px 2px #427388;
-    background-color: #2ecc71;
+  border: 1px solid;
+  box-shadow: inset 0 0 20px rgba(200, 255, 255, .5), 0 0 20px rgba(255, 255, 255, .2);
+  outline-color: rgba(255, 255, 255, 0);
+  outline-offset: 15px;
+  text-shadow: 1px 1px 2px #427388;
+  background-color: #2ecc71;
 }
 
 .button{
-    padding: 10px 30px;
-    background-color: #27ae60;
-    border: hidden;
-    border-radius: 5px;
+  color: #fff;
+  font-family: "LatoBold", sans-serif;
+  padding: 10px 30px;
+  background-color: #27ae60;
+  border: hidden;
+  border-radius: 5px;
 }
 
-.button:hover, .button:focus{
-    border: 1px solid;
-    box-shadow: inset 0 0 20px rgba(200, 255, 255, .5), 0 0 20px rgba(255, 255, 255, .2);
-    outline-color: rgba(255, 255, 255, 0);
-    outline-offset: 15px;
-    text-shadow: 1px 1px 2px #427388;
-    background-color: #2ecc71;
+.button:hover{
+  border: 1px solid;
+  box-shadow: inset 0 0 20px rgba(200, 255, 255, .5), 0 0 20px rgba(255, 255, 255, .2);
+  outline-color: rgba(255, 255, 255, 0);
+  outline-offset: 15px;
+  text-shadow: 1px 1px 2px #427388;
+  background-color: #2ecc71;
 }
+
+#bootstrap-overrides .btn {
+  color: #fff;
+  font-family: "LatoBold", sans-serif;
+  padding: 10px 10px;
+  background-color: #4E9359;
+  border: hidden;
+  border-radius: 5px;
+}
+
+#bootstrap-overrides .btn:hover{
+  color: #fff;
+  border: 1px solid;
+  box-shadow: inset 0 0 20px rgba(200, 255, 255, .5), 0 0 20px rgba(255, 255, 255, .2);
+  outline-color: rgba(255, 255, 255, 0);
+  outline-offset: 15px;
+  text-shadow: 1px 1px 2px #427388;
+  background-color: #2ecc71;
+}
+
+.table tbody, .table thead {
+  display: block;
+}
+
+.table tbody {
+  width: 100%;
+  overflow: auto;
+  height: 600px;
+}
+
+#bootstrap-overrides .table-row-selected, .table-row-selected:hover, .table-row-selected:focus {
+  background-color: #63B175;
+}
+
+td:nth-child(1), th:nth-child(1) { min-width: 50px; }
+td:nth-child(2), th:nth-child(2) { min-width: 250px; }
+td:nth-child(3), th:nth-child(3) { min-width: 200px; }
+td:nth-child(4), th:nth-child(4) { min-width: 200px; }
+td:nth-child(5), th:nth-child(5) { min-width: 150px; }
+td:nth-child(6), th:nth-child(6) { min-width: 150px; }
+td:nth-child(7), th:nth-child(7) { width: 100px; }
 
 .glyphicon{
   color: #fff;
+}
+
+#bootstrap-overrides .input-group .form-control, .input-group-btn > .btn {
+  position: static;
+}
+
+.col-lg-1, .col-lg-10, .col-lg-11, .col-lg-12, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9,
+.col-md-1, .col-md-10, .col-md-11, .col-md-12, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9,
+.col-sm-1, .col-sm-10, .col-sm-11, .col-sm-12, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9,
+.col-xs-1, .col-xs-10, .col-xs-11, .col-xs-12, .col-xs-2, .col-xs-3, .col-xs-4, .col-xs-5, .col-xs-6, .col-xs-7, .col-xs-8, .col-xs-9 {
+  position: static;
 }
 
 .form-control {
@@ -192,6 +275,11 @@ footer { background-color:#0c1a1e; min-height: 100px; position: static; bottom: 
   background-position: 0 0;
 }
 
-body{
-  background: url("http://i.imgur.com/QzEo0On.jpg");
+.form-control:focus {
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 96%, #11f7e4 4%);
+}
+
+.form-field-name {
+  width: 400px;
+  color: #123;
 }
