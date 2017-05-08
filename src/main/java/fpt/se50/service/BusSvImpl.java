@@ -1,10 +1,12 @@
 package fpt.se50.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import fpt.se50.entity.BusService;
 import fpt.se50.repository.BusServiceRepository;
 
+@Service
 public class BusSvImpl implements BusServiceService
 {
 
