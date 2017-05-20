@@ -4,6 +4,7 @@ $(window).on("load resize ", function() {
 }).resize();
 
 $(document).ready(function () {
+		
     if (getUrlParameter("true") != null) {
         showWelcomeLoginSuccess();
     }

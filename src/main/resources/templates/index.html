@@ -1,63 +1,14 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+  <th:block th:replace="master::head"></th:block>
     <title>Trang chu</title>
-    <meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <meta th:name="_csrf" th:content="${_csrf.token}"/>
-    <meta th:name="_csrf_header" th:content="${_csrf.headerName}"/>
-    <link rel="stylesheet"
-          href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
-    <link rel="stylesheet" href="css/index.css"/>
-
-    <!-- SweetAlert2 -->
-    <link rel="stylesheet"
-          href="https://cdn.jsdelivr.net/sweetalert2/6.4.2/sweetalert2.min.css"
-          th:href="@{/webjars/sweetalert2/6.4.2/dist/sweetalert2.min.css}"/>
-    <script th:src="@{/webjars/sweetalert2/6.4.2/dist/sweetalert2.min.js}"
-            src="https://cdn.jsdelivr.net/sweetalert2/6.4.2/sweetalert2.min.js"></script>
-    <!--  -->
-
-    <script
-            src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
-    <script
-            src="https://cdnjs.cloudflare.com/ajax/libs/json2/20160511/json2.js"></script>
-    <script
-            src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script src="../static/js/index.js" th:src="@{/js/index.js}"></script>
-
-    <link rel="stylesheet" href="../static/css/themtuyenxe.css" th:href="@{/css/themtuyenxe.css}"/>
+    <script src="../static/js/index.js" th:src="@{/js/index.js}"></script> 
 </head>
 <body id="bootstrap-overrides">
 <!--  -->
 <main>
-    <nav class="navbar navbar-default" role="navigation"
-         style="background-color: #63B175;">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <a class="navbar-brand home-navbar-brand" th:href="@{/}">Bến Xe Đà
-                    Nẵng</a>
-            </div>
-            <ul class="nav navbar-nav">
-                <li class="active" style="color: #fff"><a href="#">Home</a></li>
-
-                <li class="dropdown"><a class="dropdown-toggle"
-                                        data-toggle="dropdown" href="#" style="color: #fff">Giới thiệu<span
-                        class="caret" style="color: #fff"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">Giới thiệu chung</a></li>
-                        <li><a href="#">Lịch sử hình thành</a></li>
-                        <li><a href="#">Cơ cấu tổ chức</a></li>
-                    </ul>
-                </li>
-                <li><a href="#" style="color: #fff">Tuyến xe</a></li>
-                <li><a href="#" style="color: #fff">Nhà xe</a></li>
-                <th:block sec:authorize="isAuthenticated()">
-                <li><a href="#" style="color: #fff">Quang.td95</a></li>
-                </th:block>
-            </ul>
-        </div>
-    </nav>
+    <nav th:replace="master::header"></nav>
     <div class="body">
         <div class="container">
             <CENTER>
@@ -257,67 +208,6 @@
                 </div>
 
 </main>
-<footer>
-    <div class="container footer-container">
-        <div class="row">
-            <div class="col-md-4 col-sm-6 footerleft ">
-                <div class="logofooter">LIÊN HỆ</div>
-                <div class="logofooter">
-                    <hr/>
-                </div>
-                <p>CÔNG TY CỔ PHẦN VẬN TẢI VÀ QUẢN LÝ BẾN XE ĐÀ NẴNG</p>
-                <p>
-                    <i class="fa fa-map-pin"></i>Địa chỉ: Phường Hoà An - Quận Cẩm Lệ
-                    - TP. Đà Nẵng
-                </p>
-                <p>
-                    <i class="fa fa-phone"></i>Điện thoại: 0511.3767428. Fax:
-                    0511.3680717
-                </p>
-                <p>
-                    <i class="fa fa-phone"></i>Đặt vé: 0511.3767679 - 3767678
-                </p>
-                <p>
-                    <i class="fa fa-envelope"></i>E-mail: info@benxetrungtamdanang.vn
-                </p>
-
-            </div>
-            <div class="col-md-2 col-sm-6 paddingtop-bottom">
-                <div class="logofooter">DANH MỤC</div>
-                <div class="logofooter">
-                    <hr/>
-                </div>
-                <ul class="footer-ul">
-                    <li><a href="#">Tuyến xe</a></li>
-                    <li><a href="#">Giới thiệu</a></li>
-                    <li><a href="#">Sơ đồ bãi đậu xe</a></li>
-                    <li><a href="#">Sơ đồ nhà ga bán vé</a></li>
-                    <li><a href="#">Liên hệ</a></li>
-                    <th:block sec:authorize="hasRole('ROLE_ANONYMOUS')">
-                        <li><a id="login" th:href="@{/login}" href="/login">Đăng nhập</a></li>
-                    </th:block>
-                    <th:block sec:authorize="isAuthenticated()">
-                        <li><a id="logout" onclick="logout()">Đăng xuất</a></li>
-                    </th:block>
-
-                </ul>
-            </div>
-
-            <div class="col-md-3 col-sm-6 paddingtop-bottom">
-                <div class="fb-page" data-href="https://www.facebook.com/facebook"
-                     data-tabs="timeline" data-height="300" data-small-header="false"
-                     style="margin-bottom: 15px;" data-adapt-container-width="true"
-                     data-hide-cover="false" data-show-facepile="true">
-                    <div class="fb-xfbml-parse-ignore">
-                        <blockquote cite="https://www.facebook.com/facebook">
-                            <a
-                                    href="https://www.facebook.com/B%E1%BA%BFn-Xe-Trung-T%C3%A2m-%C4%90%C3%A0-N%E1%BA%B5ng-1450405431879714/?fref=ts">Facebook</a>
-                        </blockquote>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</footer>
+<footer th:replace="master::footer"></footer>
 </body>
 </html>
