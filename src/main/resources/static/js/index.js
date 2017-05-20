@@ -14,11 +14,11 @@ $(document).ready(function () {
         myUrl = window.location.pathname;
         myUrl +='?source=';
         myUrl +=$('#searchSource').val(),
-            myUrl +='&destination=';
+        myUrl +='&destination=';
         myUrl +=$('#searchDestination').val(),
-            myUrl +='&busService=';
+        myUrl +='&busService=';
         myUrl +=$('#searchBusService').val(),
-            window.location.replace(myUrl);
+        window.location.replace(myUrl);
     });
 
     
@@ -58,50 +58,50 @@ $(document).ready(function () {
 
             /////////////EVENT////////////////////
             $("#home-dialog-add-btn").on('click',function(){
-            	  var token = $("meta[name='_csrf']").attr("content");
-                  var header = $("meta[name='_csrf_header']").attr("content");
+             var token = $("meta[name='_csrf']").attr("content");
+             var header = $("meta[name='_csrf_header']").attr("content");
 
-                var data= {
-                	source: "Đà Nẵng-Bến xe TT Đà nẵng",
-                    destination:$("#home-dialog-destination").val(),
-                    busServiceDestination: $("home-dialog-bus-service-destination").val(),
-                    busService:$("#home-dialog-bus-service").val(),
-                    departureTime: $("home-dialog-departure-time").val(),
-                    departureDate: "",
-                    arrivalTime: $("home-dialog-arrival-time").val(),
-                    arrivalDate: "",
-                    ticketPrice: $("home-dialog-ticket-price").val(),
-                    totalTickets: "",
-                    remainingTicket: $("home-dialog-remaining-ticket").val(),
-                    contact: $("home-dialog-contact").val()
-                };
-            $.ajax({
-                type: 'POST',
-                url: '/busroute/add',
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                data: JSON.stringify(data),
-                traditional: true,
-                beforeSend: function(xhr){
-                    xhr.setRequestHeader(header, token);
-                },
-                success: function(data) {
-                    
-                    console.log(data);
-                    swal({
-                        title: 'Thành công',
-                        text: data.responseText,
-                        type: 'success'
-                        }).then(function(){
-                            window.location.replace("/");
-                        })
+             var data= {
+               source: "Đà Nẵng-Bến xe TT Đà nẵng",
+               destination:$("#home-dialog-destination").val(),
+               busServiceDestination: $("home-dialog-bus-service-destination").val(),
+               busService:$("#home-dialog-bus-service").val(),
+               departureTime: $("home-dialog-departure-time").val(),
+               departureDate: "",
+               arrivalTime: $("home-dialog-arrival-time").val(),
+               arrivalDate: "",
+               ticketPrice: $("home-dialog-ticket-price").val(),
+               totalTickets: "",
+               remainingTicket: $("home-dialog-remaining-ticket").val(),
+               contact: $("home-dialog-contact").val()
+           };
+           $.ajax({
+            type: 'POST',
+            url: '/busroute/add',
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            data: JSON.stringify(data),
+            traditional: true,
+            beforeSend: function(xhr){
+                xhr.setRequestHeader(header, token);
+            },
+            success: function(data) {
 
-                },
-                error:function(data){
-                	alert(data.responseText);
-                }
-            });
-            });
+                console.log(data);
+                swal({
+                    title: 'Thành công',
+                    text: data.responseText,
+                    type: 'success'
+                }).then(function(){
+                    window.location.replace("/");
+                })
+
+            },
+            error:function(data){
+               alert(data.responseText);
+           }
+       });
+       });
 
 
             /////////////EVENT////////////////////
@@ -155,7 +155,7 @@ $(document).ready(function () {
             
         });
     });
-    
+
     ///////////
     
 });
@@ -177,159 +177,164 @@ function showWelcomeLoginSuccess() {
         'Welcome!',
         'Đăng nhập thành công',
         'success'
-    ).then(function () {
-        location.href=location.href.replace("?true", "");
-    });
-}
-function logout() {
-    swal({
-        title: 'Đăng xuất?',
-        text: "Bạn sẽ không còn quyền admin!",
-        type: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Đăng xuất ngay!'
-    }).then(function () {
-        window.location.replace("/logout");
-    })
-}
+        ).then(function () {
+            location.href=location.href.replace("?true", "");
+        });
+    }
+    function logout() {
+        swal({
+            title: 'Đăng xuất?',
+            text: "Bạn sẽ không còn quyền admin!",
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Đăng xuất ngay!'
+        }).then(function () {
+            window.location.replace("/logout");
+        })
+    }
 
-var getUrlParameter = function getUrlParameter(sParam) {
-    var sPageURL = decodeURIComponent(window.location.search.substring(1)),
+    var getUrlParameter = function getUrlParameter(sParam) {
+        var sPageURL = decodeURIComponent(window.location.search.substring(1)),
         sURLVariables = sPageURL.split('&'),
         sParameterName,
         i;
 
-    for (i = 0; i < sURLVariables.length; i++) {
-        sParameterName = sURLVariables[i].split('=');
+        for (i = 0; i < sURLVariables.length; i++) {
+            sParameterName = sURLVariables[i].split('=');
 
-        if (sParameterName[0] === sParam) {
-            return sParameterName[1] === undefined ? true : sParameterName[1];
+            if (sParameterName[0] === sParam) {
+                return sParameterName[1] === undefined ? true : sParameterName[1];
+            }
         }
-    }
-};
+    };
 
 
-function closeDialog() {
-    $("#home-dialog-destination").val("");
-    $("#home-dialog-bus-service").val("");
-    $("#home-dialog-departure-time").val("");
-    $("#home-dialog-bus-service-destination").val("");
-    $("#home-dialog-arrival-time").val("");
-    $("#home-dialog-ticket-price").val("");
-    $("#home-dialog-remaining-ticket").val("");
-    $("#home-dialog-contact").val("");
+    function closeDialog() {
+        $("#home-dialog-destination").val("");
+        $("#home-dialog-bus-service").val("");
+        $("#home-dialog-departure-time").val("");
+        $("#home-dialog-bus-service-destination").val("");
+        $("#home-dialog-arrival-time").val("");
+        $("#home-dialog-ticket-price").val("");
+        $("#home-dialog-remaining-ticket").val("");
+        $("#home-dialog-contact").val("");
 
-    $("#add-bus-route").hide();
-    $("#delete-bus-route").hide();
-    $("#home-dialog-add-btn").hide();
-    $("#home-dialog-edit-btn").hide();
-    $("#home-dialog-delete-btn").hide();
-    $("#home-dialog-cancel-btn").hide();
-    $("#home-dialog-ok-btn").hide();
+        $("#add-bus-route").hide();
+        $("#delete-bus-route").hide();
+        $("#home-dialog-add-btn").hide();
+        $("#home-dialog-edit-btn").hide();
+        $("#home-dialog-delete-btn").hide();
+        $("#home-dialog-cancel-btn").hide();
+        $("#home-dialog-ok-btn").hide();
 
-    $("#home-dialog-delete-btn").on('click',function(){
+        $("#home-dialog-delete-btn").on('click',function(){
 
-        var delete_ids = findDeleteIds();
-        console.log(delete_ids);
+            var delete_ids = findDeleteIds();
+            console.log(delete_ids);
 
-        if (delete_ids.length == 0) alert("You haven't choosen any row");
-        else {
+            if (delete_ids.length == 0) alert("You haven't choosen any row");
+            else {
 
-            var token = $("meta[name='_csrf']").attr("content");
-            var header = $("meta[name='_csrf_header']").attr("content");
+                var token = $("meta[name='_csrf']").attr("content");
+                var header = $("meta[name='_csrf_header']").attr("content");
 
-            $.ajax({
-                type: 'POST',
-                url: '/busroute/delete',
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                data: JSON.stringify(delete_ids),
-                traditional: true,
-                beforeSend: function(xhr){
-                    xhr.setRequestHeader(header, token);
-                },
-                complete: function(data) {
-                    
-                    console.log(data);
-                    swal({
-                        title: 'Thành công',
-                        text: data.responseText,
-                        type: 'success'
+                $.ajax({
+                    type: 'POST',
+                    url: '/busroute/delete',
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    data: JSON.stringify(delete_ids),
+                    traditional: true,
+                    beforeSend: function(xhr){
+                        xhr.setRequestHeader(header, token);
+                    },
+                    complete: function(data) {
+
+                        console.log(data);
+                        swal({
+                            title: 'Thành công',
+                            text: data.responseText,
+                            type: 'success'
                         }).then(function(){
                             window.location.replace("/");
                         })
 
-                }
-            });
+                    }
+                });
+            }
+
+        });
+    }
+
+    function procDateTime() {
+        var cnttr = $(".table-content tr").length;
+
+        for (var idx = 1; idx <= cnttr; idx++)
+        {
+        //////////////////////////////////////////// DEPARTURE TIME
+        var txt = $('.table-content').find('tr:nth-child(' + idx + ') td:nth-child(4) span:nth-of-type(2)').text();
+
+        var year = "";
+        var month = "";
+        var day = "";
+        var time = "";
+
+        var i = 0;
+        for (; i < 4; i++)
+        {
+            year += txt[i];
+        }
+        i++;
+        for (var cnt = 0; cnt < 2; cnt++, i++)
+        {
+            month += txt[i];
+        }
+        i++;
+        for (var cnt = 0; cnt < 2; cnt++, i++)
+        {
+            day += txt[i];
+        }
+        i++;
+        for (var cnt = 0; cnt < 5; cnt++, i++)
+        {
+            time += txt[i];
         }
 
-    });
-}
+        $('.table-content').find('tr:nth-child(' + idx + ') td:nth-child(4) span:nth-of-type(2)').html("<span>" + time + "</span> <br/> <span>" + day + "/" + month + "/" + year);
 
-function procDateTime() {
-    //////////////////////////////////////////// DEPARTURE TIME
-    var txt = $('.table-content').find('tr:first td:nth-child(3) span:nth-of-type(2)').text();
+        //////////////////////////////////////////// ARRIVAL TIME
+        txt = $('.table-content').find('tr:nth-child(' + idx + ') td:nth-child(5) span:nth-of-type(2)').text();
 
-    var year = "";
-    var month = "";
-    var day = "";
-    var time = "";
+        year = "";
+        month = "";
+        day = "";
+        time = "";
 
-    var i = 0;
-    for (; i < 4; i++)
-    {
-        year += txt[i];
-    }
-    i++;
-    for (var cnt = 0; cnt < 2; cnt++, i++)
-    {
-        month += txt[i];
-    }
-    i++;
-    for (var cnt = 0; cnt < 2; cnt++, i++)
-    {
-        day += txt[i];
-    }
-    i++;
-    for (var cnt = 0; cnt < 5; cnt++, i++)
-    {
-        time += txt[i];
-    }
+        var i = 0;
+        for (; i < 4; i++)
+        {
+            year += txt[i];
+        }
+        i++;
+        for (var cnt = 0; cnt < 2; cnt++, i++)
+        {
+            month += txt[i];
+        }
+        i++;
+        for (var cnt = 0; cnt < 2; cnt++, i++)
+        {
+            day += txt[i];
+        }
+        i++;
+        for (var cnt = 0; cnt < 5; cnt++, i++)
+        {
+            time += txt[i];
+        }
 
-    $('.table-content').find('tr:first td:nth-child(3) span:nth-of-type(2)').html(time + "<br/>" + day + "/" + month + "/" + year);
-
-    //////////////////////////////////////////// ARRIVAL TIME
-    txt = $('.table-content').find('tr:first td:nth-child(4) span:nth-of-type(2)').text();
-
-    year = "";
-    month = "";
-    day = "";
-    time = "";
-
-    var i = 0;
-    for (; i < 4; i++)
-    {
-        year += txt[i];
+        $('.table-content').find('tr:nth-child(' + idx + ') td:nth-child(5) span:nth-of-type(2)').html("<span>" + time + "</span> <br/> <span>" + day + "/" + month + "/" + year);
     }
-    i++;
-    for (var cnt = 0; cnt < 2; cnt++, i++)
-    {
-        month += txt[i];
-    }
-    i++;
-    for (var cnt = 0; cnt < 2; cnt++, i++)
-    {
-        day += txt[i];
-    }
-    i++;
-    for (var cnt = 0; cnt < 5; cnt++, i++)
-    {
-        time += txt[i];
-    }
-
-    $('.table-content').find('tr:first td:nth-child(4) span:nth-of-type(2)').html(time + "<br/>" + day + "/" + month + "/" + year);
 }
 
 

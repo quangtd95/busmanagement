@@ -230,13 +230,14 @@ footer {
   background-color: #63B175;
 }
 
-td:nth-child(1), th:nth-child(1) { min-width: 50px; }
-td:nth-child(2), th:nth-child(2) { min-width: 250px; }
-td:nth-child(3), th:nth-child(3) { min-width: 200px; }
+td:nth-child(1), th:nth-child(1) { min-width: 0px; }
+td:nth-child(2), th:nth-child(2) { min-width: 50px; }
+td:nth-child(3), th:nth-child(3) { min-width: 250px; }
 td:nth-child(4), th:nth-child(4) { min-width: 200px; }
-td:nth-child(5), th:nth-child(5) { min-width: 150px; }
+td:nth-child(5), th:nth-child(5) { min-width: 200px; }
 td:nth-child(6), th:nth-child(6) { min-width: 150px; }
-td:nth-child(7), th:nth-child(7) { width: 100px; }
+td:nth-child(7), th:nth-child(7) { min-width: 150px; }
+td:nth-child(8), th:nth-child(8) { width: 100px; }
 
 .glyphicon{
   color: #fff;
@@ -264,7 +265,7 @@ td:nth-child(7), th:nth-child(7) { width: 100px; }
   transition: all 0.3s cubic-bezier(0.64, 0.09, 0.08, 1);
   background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 96%, #1abc9c 4%);
   background-position: -200px 0;
-  background-size: 200px 100%;
+  background-size: 180px 100%;
   background-repeat: no-repeat;
   color: #0e6252;
 }
@@ -282,4 +283,61 @@ td:nth-child(7), th:nth-child(7) { width: 100px; }
 .form-field-name {
   width: 400px;
   color: #123;
+}
+
+.form-control1 {
+  margin: 10px 10px;
+  width: 380px;
+  display: block;
+  border: none;
+  padding: 10px 0;
+  border-bottom: solid 1px #1abc9c;
+  border-radius: 5px;
+  transition: all 0.3s cubic-bezier(0.64, 0.09, 0.08, 1);
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 96%, #1abc9c 4%);
+  background-position: -380px 0;
+  background-size: 380px 100%;
+  background-repeat: no-repeat;
+  color: #0e6252;
+}
+
+.form-control1:focus, .form-control1:valid {
+  box-shadow: none;
+  outline: none;
+  background-position: 0 0;
+}
+
+.form-control1:focus {
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 96%, #11f7e4 4%);
+}
+
+.form-field-name {
+  width: 400px;
+  color: #123;
+}
+
+.home-dialog-form {
+
+}
+
+#home-dialog-booking .form-group {
+  margin-bottom: 15px;
+  float: right;
+}
+
+#home-dialog-booking .form-control {
+  height: 30px;
+  background-size: 200px 100%;
+}
+
+#home-dialog-booking .form-field-name {
+  width: 100px;
+  float: left;
+  margin-bottom: 0px;
+  line-height: 34px;
+  text-align: left;
+}
+
+#home-dialog-booking .input-group {
+  margin: 0;
 }

@@ -9,6 +9,7 @@
 <!--  -->
 <main>
     <nav th:replace="master::header"></nav>
+
     <div class="body">
         <div class="container">
             <CENTER>
@@ -19,195 +20,201 @@
                 <div class="input-group add-on">
                     <div class="form-group">
                         <th:block th:if="${param.source ==  null}">
-                            <input id="searchSource" class="form-control" type="text"
-                                   placeholder="Nơi đi"/>
-                        </th:block>
-                        <th:block th:if="${param.source != null}">
-                            <input id="searchSource" class="form-control" type="text"
-                                   placeholder="Nơi đi" th:value="${param.source[0]}"/>
-                        </th:block>
+                        <input id="searchSource" class="form-control" type="text"
+                        placeholder="Nơi đi"/>
+                    </th:block>
+                    <th:block th:if="${param.source != null}">
+                    <input id="searchSource" class="form-control" type="text"
+                    placeholder="Nơi đi" th:value="${param.source[0]}"/>
+                </th:block>
+            </div>
+            <div class="form-group">
+                <th:block th:if="${param.destination == null}">
+                <input id="searchDestination" class="form-control" type="text"
+                placeholder="Nơi đến"/>
+            </th:block>
+            <th:block th:if="${param.destination != null}">
+            <input id="searchDestination" class="form-control" type="text"
+            placeholder="Nơi đến" th:value="${param.destination[0]}"/>
+        </th:block>
+    </div>
+    <div class="form-group">
+        <th:block th:if="${param.busService == null}">
+        <input id="searchBusService" class="form-control" type="text"
+        placeholder="Nhà xe"/>
+    </th:block>
+    <th:block th:if="${param.busService!=null}">
+    <input id="searchBusService" class="form-control" type="text"
+    placeholder="Nhà xe" th:value="${param.busService[0]}"/>
+</th:block>
+</div>
+<div class="input-group-btn">
+    <button type="submit" id="search-button" class="btn btn-defaut">
+        <i class="glyphicon glyphicon-search" aria-hidden="true"></i>
+    </button>
+</div>
+</div>
+</form>
+
+
+<div style="padding-top: 15px; padding-bottom: 15px">
+    <th:block sec:authorize="isAuthenticated()">
+    <div class="home-container-button home-left">
+        <button type="button"  id="home-add-bus-route-btn" class="button">Thêm</button>
+        <button type="button"  id="home-edit-bus-route-btn" class="button">Sửa</button>
+        <button  id="home-delete-bus-route-btn" type="button" class="button">Xóa</button>
+    </div>
+</th:block>
+<div class="home-container-button home-right">
+    <button type="button" class="button">Hủy vé</button>
+    <th:block sec:authorize="isAuthenticated()">
+    <div class="checkbox-inline">
+        <label><input type="checkbox" value=""/>Chọn tất cả</label>
+    </div>
+</th:block>
+</div>
+</div>
+
+<div class="table-header">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th style="display:none"></th>
+                <th>STT</th>
+                <th>Nhà xe</th>
+                <th>Nơi đi</th>
+                <th>Nơi đến</th>
+                <th>Giá tiền</th>
+                <th>Liên hệ</th>
+                <th></th>
+            </tr>
+        </thead>
+    </table>
+</div>
+<div class="table-content">
+    <table class="table table-hover" id="table-busroute-today">
+        <tbody>
+            <th:block th:each="busRoute , inerStats : ${busRoutes}">
+            <tr>
+                <td style="display:none" th:text="${busRoute.id}"></td>
+                <td th:text="${inerStats.index} + 1"></td>
+                <td th:text="${busRoute.busService.name}"><br/></td>
+                <td><span th:text="${busRoute.source}"></span><br/>Giờ đi: <span
+                    th:text="${busRoute.departureTime}"></span><br/></td>
+                    <td><span th:text="${busRoute.destination}"></span><br/>Giờ đến:
+                        <span
+                        th:text="${busRoute.arrivalTime}"></span>
+                        <br/></td>
+                        <td><span th:text="${busRoute.ticketPrice}"></span>đ<br/>Còn <span
+                            th:text="${busRoute.remainingTickets}"></span> vé<br/>
+                            <button type="button" class="btn">Đặt vé</button>
+                        </td>
+                        <td><span th:text="${busRoute.busService.phoneNumber}"></span></td>
+                        <td>
+                            <div class="checkbox">
+                                <label><input type="checkbox" value=""/></label>
+                            </div>
+                        </td>
+                    </tr>
+                </th:block>
+            </tbody>
+        </table>
+    </div>
+</div>
+</div>
+<div id="home-dialog" class="dialog">
+    <div class="dialog-overlay"></div>
+    <div class="dialog-content">
+        <div id="delete-bus-route">
+            <h4></h4>
+        </div>
+
+        <div id="add-bus-route">
+            <h3>TUYẾN XE</h3>
+            <form class="navbar-form">
+                <!-- <span class="form-field-name">TUYẾN XE</span> -->
+                <!-- <br/> -->
+                <div class="input-group add-on">
+                    <div class="form-group">
+                    <input class="form-control" type="text" placeholder="ĐÀ NẴNG" disabled="true"/>
                     </div>
                     <div class="form-group">
-                        <th:block th:if="${param.destination == null}">
-                            <input id="searchDestination" class="form-control" type="text"
-                                   placeholder="Nơi đến"/>
-                        </th:block>
-                        <th:block th:if="${param.destination != null}">
-                            <input id="searchDestination" class="form-control" type="text"
-                                   placeholder="Nơi đến" th:value="${param.destination[0]}"/>
-                        </th:block>
+                        <input class="form-control" type="text" placeholder="Nơi đến" id="home-dialog-destination"/>
+                    </div>
+                </div>
+                <br/>
+
+                <div class="input-group add-on">
+                    <div class="form-group">
+                        <input class="form-control" type="text" placeholder="Ngày đi" id="home-dialog-departure-day"/>
                     </div>
                     <div class="form-group">
-                        <th:block th:if="${param.busService == null}">
-                            <input id="searchBusService" class="form-control" type="text"
-                                   placeholder="Nhà xe"/>
-                        </th:block>
-                        <th:block th:if="${param.busService!=null}">
-                            <input id="searchBusService" class="form-control" type="text"
-                                   placeholder="Nhà xe" th:value="${param.busService[0]}"/>
-                        </th:block>
+                        <input class="form-control" type="text" placeholder="Giờ đi" id="home-dialog-departure-time"/>
                     </div>
-                    <div class="input-group-btn">
-                        <button type="submit" id="search-button" class="btn btn-defaut">
-                            <i class="glyphicon glyphicon-search" aria-hidden="true"></i>
-                        </button>
+                </div>
+                <br/>
+
+                <div class="input-group add-on">
+                    <div class="form-group">
+                        <input class="form-control" type="text" placeholder="Ngày đến" id="home-dialog-arrival-day"/>
+                    </div>
+                    <div class="form-group">
+                        <input class="form-control" type="text" placeholder="Giờ đến" id="home-dialog-arrival-time"/>
+                    </div>
+                </div>
+                <br/>
+
+                <div class="input-group add-on">
+                    <div class="form-group">
+                        <input class="form-control1" type="text" placeholder="Nhà xe" id="home-dialog-bus-service"/>
+                    </div>
+                </div>
+                <br/>
+
+                <div class="input-group add-on">
+                    <div class="form-group">
+                        <input class="form-control1" type="text" placeholder="Bến xe" id="home-dialog-bus-service-destination"/>
+                    </div>
+                </div>
+
+                <br/>
+
+                <div class="input-group add-on">
+                    <div class="form-group">
+                        <input class="form-control1" type="text" placeholder="Giá tiền" id="home-dialog-ticket-price"/>
+                    </div>
+                </div>
+
+                <br/>
+
+                <div class="input-group add-on">
+                    <div class="form-group">
+                        <input class="form-control1" type="text" placeholder="Tổng số vé" id="home-dialog-total-ticket"/>
+                    </div>
+                </div>
+
+                <br/>
+
+                <div class="input-group add-on">
+                    <div class="form-group">
+                        <input class="form-control1" type="text" placeholder="Số điện thoại" id="home-dialog-contact"/>
                     </div>
                 </div>
             </form>
+        </div>
 
-
-            <div style="padding-top: 15px; padding-bottom: 15px">
-                <th:block sec:authorize="isAuthenticated()">
-                    <div class="home-container-button home-left">
-                        <button type="button"  id="home-add-bus-route-btn" class="button">Thêm</button>
-                        <button type="button"  id="home-edit-bus-route-btn" class="button">Sửa</button>
-                        <button  id="home-delete-bus-route-btn" type="button" class="button">Xóa</button>
-                    </div>
-                </th:block>
-                <div class="home-container-button home-right">
-                    <button type="button" class="button">Hủy vé</button>
-                    <th:block sec:authorize="isAuthenticated()">
-                        <div class="checkbox-inline">
-                            <label><input type="checkbox" value=""/>Chọn tất cả</label>
-                        </div>
-                    </th:block>
-                </div>
-            </div>
-
-            <div class="table-header">
-                <table class="table table-hover">
-                    <thead>
-                    <tr>
-                        <th>STT</th>
-                        <th>Nhà xe</th>
-                        <th>Nơi đi</th>
-                        <th>Nơi đến</th>
-                        <th>Giá tiền</th>
-                        <th>Liên hệ</th>
-                        <th></th>
-                    </tr>
-                    </thead>
-                </table>
-            </div>
-            <div class="table-content">
-                <table class="table table-hover" id="table-busroute-today">
-                    <tbody>
-                    <th:block th:each="busRoute , inerStats : ${busRoutes}">
-                        <tr>
-                            <td style="display:none" th:text="${busRoute.id}"></td>
-                            <td th:text="${inerStats.index} + 1"></td>
-                            <td th:text="${busRoute.busService.name}"><br/></td>
-                            <td><span th:text="${busRoute.source}"></span><br/>Giờ đi: <span
-                                    th:text="${busRoute.departureTime}"></span><br/></td>
-                            <td><span th:text="${busRoute.destination}"></span><br/>Giờ đến:
-                                <span
-                                        th:text="${busRoute.arrivalTime}"></span>
-                                <br/></td>
-                            <td><span th:text="${busRoute.ticketPrice}"></span>đ<br/>Còn <span
-                                    th:text="${busRoute.remainingTickets}"></span> vé<br/>
-                                <button type="button" class="btn">Đặt vé</button>
-                            </td>
-                            <td><span th:text="${busRoute.busService.phoneNumber}"></span></td>
-                            <td>
-                                <div class="checkbox">
-                                    <label><input type="checkbox" value=""/></label>
-                                </div>
-                            </td>
-                        </tr>
-                    </th:block>
-                    </tbody>
-                </table>
-            </div>
+        <div>
+            <a href="#" class="btn" id="home-dialog-add-btn">Thêm</a>
+            <a href="#" class="btn" id="home-dialog-edit-btn">Sửa</a>
+            <a href="#" class="btn" id="home-dialog-delete-btn">Xóa</a>
+            <a href="#" class="btn home-dialog-close" id="home-dialog-cancel-btn">Huỷ</a>
+            <a href="#" class="btn home-dialog-close" id="home-dialog-ok-btn">OK</a>
         </div>
     </div>
-        <div id="home-dialog" class="dialog">
-                    <div class="dialog-overlay"></div>
-                    <div class="dialog-content">
-                        <div id="delete-bus-route">
-                            <h4></h4>
-                        </div>
-
-                        <div id="add-bus-route">
-                            <form class="navbar-form">
-                                <span class="form-field-name">Tuyến</span>
-                                <div class="input-group add-on">
-                                    <div class="form-group">
-                                        <input class="form-control" type="text" placeholder="ĐÀ NẴNG" disabled="true"/>
-                                    </div>
-                                    <div class="form-group">
-                                        <input class="form-control" type="text" placeholder="Nơi đến" id="home-dialog-destination"/>
-                                    </div>
-                                </div>
-
-                                <br/>
-                                <span class="form-field-name">Nhà xe</span>
-                                <div class="input-group add-on">
-                                    <div class="form-group">
-                                        <input class="form-control" type="text" placeholder="Nhà xe" id="home-dialog-bus-service"/>
-                                    </div>
-                                </div>
-
-                                <br/>
-                                <span class="form-field-name">Giờ đi</span>
-                                <div class="input-group add-on">
-                                    <div class="form-group">
-                                        <input class="form-control" type="text" placeholder="Giờ đi" id="home-dialog-departure-time"/>
-                                    </div>
-                                </div>
-
-                                <br/>
-                                <span class="form-field-name">Bến đến</span>
-                                <div class="input-group add-on">
-                                    <div class="form-group">
-                                        <input class="form-control" type="text" placeholder="Bến xe" id="home-dialog-bus-service-destination"/>
-                                    </div>
-                                </div>
-
-                                <br/>
-                                <span class="form-field-name">Giờ đến</span>
-                                <div class="input-group add-on">
-                                    <div class="form-group">
-                                        <input class="form-control" type="text" placeholder="Giờ đến" id="home-dialog-arrival-time"/>
-                                    </div>
-                                </div>
-
-                                <br/>
-                                <span class="form-field-name">Giá tiền</span>
-                                <div class="input-group add-on">
-                                    <div class="form-group">
-                                        <input class="form-control" type="text" placeholder="Giá tiền" id="home-dialog-ticket-price"/>
-                                    </div>
-                                </div>
-
-                                <br/>
-                                <span class="form-field-name">Số vé còn lại</span>
-                                <div class="input-group add-on">
-                                    <div class="form-group">
-                                        <input class="form-control" type="text" id="home-dialog-remaining-ticket"/>
-                                    </div>
-                                </div>
-
-                                <br/>
-                                <span class="form-field-name">Liên hệ</span>
-                                <div class="input-group add-on">
-                                    <div class="form-group">
-                                        <input class="form-control" type="text" placeholder="Số điện thoại" id="home-dialog-contact"/>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-
-                        <div>
-                            <a href="#" class="btn" id="home-dialog-add-btn">Thêm</a>
-                            <a href="#" class="btn" id="home-dialog-edit-btn">Sửa</a>
-                            <a href="#" class="btn" id="home-dialog-delete-btn">Xóa</a>
-                            <a href="#" class="btn home-dialog-close" id="home-dialog-cancel-btn">Huỷ</a>
-                            <a href="#" class="btn home-dialog-close" id="home-dialog-ok-btn">OK</a>
-                        </div>
-                    </div>
-                </div>
+</div>
 
 </main>
 <footer th:replace="master::footer"></footer>
+>>>>>>> quang-busservice-page
 </body>
 </html>
