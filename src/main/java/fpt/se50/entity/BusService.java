@@ -27,6 +27,9 @@ public class BusService {
 	@Column(name="PHONE")
 	private String phoneNumber;
 	
+	@Column(name="IMAGE")
+	private String image;
+	
 	@OneToMany(fetch=FetchType.LAZY,mappedBy="busService")
 	@JsonManagedReference
 	private Set<BusRoute> busRoutes;
@@ -62,5 +65,15 @@ public class BusService {
 	public void setBusRoutes(Set<BusRoute> busRoutes) {
 		this.busRoutes = busRoutes;
 	}
+
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
+	}
+	
+	
 	
 }

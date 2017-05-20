@@ -1,0 +1,108 @@
+@font-face {
+  font-family: "LatoRegular";
+  src: url("../fonts/Lato-Regular.woff2");
+}
+
+@font-face {
+  font-family: "LatoBold";
+  src: url("../fonts/Lato-Bold.woff2");
+}
+
+#bootstrap-overrides .container-fluid {
+  padding-left: calc(50vw - 560px);
+  padding-right: calc(50vw - 560px);
+}
+
+#bootstrap-overrides .navbar-brand {
+  font-family: "LatoBold", sans-serif;
+  color: #fff;
+  text-decoration: none;
+  font-size: 22px;
+}
+
+#bootstrap-overrides .navbar-header {
+  padding: 0;
+  width: 50%;
+  text-align: left;
+}
+
+.navbar-nav{
+  font-family: "LatoBold", sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  unicode-range: U+0-FF, U+131, U+152-153, U+2C6, U+2DA, U+2DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215;
+}
+
+.navbar-default {
+  margin-bottom: 0px;
+}
+
+#bootstrap-overrides .navbar-nav>.active>a, .navbar-nav>.active>a:focus{
+  color: #fff;
+  background-color: #4e9359;
+}
+
+#bootstrap-overrides .navbar-nav li a:hover, .navbar-nav li a:focus, .navbar-nav li:focus{
+  color: #fff;
+  background-color: #535353;
+}
+
+#bootstrap-overrides .navbar-nav>.open>a, .navbar-nav>.open>a:focus, .navbar-nav>.open>a:hover {
+  color: #fff;
+  background-color: #535353;
+}
+
+#bootstrap-overrides .dropdown-menu li a:hover, .dropdown-menu li a:focus {
+  color: #63B175;
+  background-color: #535353;
+}
+
+#bootstrap-overrides .dropdown-menu, .dropdown-menu li a {
+  color: #fff;
+  background-color: #535353;
+}
+
+
+/*.menu-text {
+  margin: 10px auto;
+  padding: 0;
+}*/
+
+footer { 
+  font-family: "LatoRegular", sans-serif;
+  background-color: #323232;
+  min-height: 100px;
+  position: static;
+  bottom: 0; 
+  width: 100%;
+  padding-bottom: 10px;
+
+}
+.footerleft { margin-top:50px; padding:0 36px; }
+.logofooter { margin-bottom:10px; font-size:25px; color:#fff; font-weight:700;}
+
+.footerleft p { color:#fff; font-size:12px !important; margin-bottom:15px;}
+.footerleft p i { width:20px; color:#999;}
+
+
+.paddingtop-bottom {  margin-top:50px;}
+.footer-ul { list-style-type:none;  padding-left:0px; margin-left:2px;}
+.footer-ul li { line-height:29px; font-size:12px;}
+.footer-ul li a { color:#a0a3a4; transition: color 0.2s linear 0s, background 0.2s linear 0s; }
+.footer-ul i { margin-right:10px;}
+.footer-ul li a:hover {transition: color 0.2s linear 0s, background 0.2s linear 0s; color:#ff670f; }
+
+.social:hover {
+ -webkit-transform: scale(1.1);
+ -moz-transform: scale(1.1);
+ -o-transform: scale(1.1);
+}
+
+.icon-ul { list-style-type:none !important; margin:0px; padding:0px;}
+.icon-ul li { line-height:75px; width:100%; float:left;}
+.icon { float:left; margin-right:5px;}
+
+.footer-container {
+  background-color: transparent;
+}
