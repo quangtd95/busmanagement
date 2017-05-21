@@ -66,7 +66,7 @@
     </div>
 </th:block>
 <div class="home-container-button home-right">
-    <button type="button" class="button">Hủy vé</button>
+    <button type="button" id="home-cancel-booking-btn" class="button">Hủy vé</button>
     <th:block sec:authorize="isAuthenticated()">
     <div class="checkbox-inline">
         <label><input type="checkbox" value=""/>Chọn tất cả</label>
@@ -209,6 +209,26 @@
             <a href="#" class="btn" id="home-dialog-delete-btn">Xóa</a>
             <a href="#" class="btn home-dialog-close" id="home-dialog-cancel-btn">Huỷ</a>
             <a href="#" class="btn home-dialog-close" id="home-dialog-ok-btn">OK</a>
+        </div>
+    </div>
+</div>
+
+<div id="home-dialog-cancel-booking" class="dialog">
+    <div class="dialog-overlay"></div>
+    <div class="dialog-content">
+        <h3>HỦY VÉ</h3>
+        <form class="navbar-form">
+            <!-- <span class="form-field-name">Mã vé</span> -->
+            <div class="input-group add-on">
+                <div class="form-group">
+                <input class="form-control" type="text" placeholder="Mã vé"/>
+                </div>
+            </div>
+        </form>
+        
+        <div>
+            <a href="#" class="btn home-dialog-close" id="home-dialog-cancel-btn">Huỷ</a>
+            <a href="#" class="btn home-dialog-close" id="home-dialog-ok-btn">Xác nhận</a>
         </div>
     </div>
 </div>

@@ -151,11 +151,6 @@ $(document).ready(function () {
         $(".home-dialog-close").on("click", function() {
             closeDialog();
             $("#home-dialog").removeClass('dialog-open').addClass('dialog-close');
-            $("#home-dialog-cancel-booking").removeClass('dialog-open').addClass('dialog-close');
-        });
-
-        $("#home-cancel-booking-btn").on("click", function() {
-            $("#home-dialog-cancel-booking").removeClass('dialog-close').addClass('dialog-open');
             
         });
     });

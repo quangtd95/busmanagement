@@ -54,7 +54,8 @@ h1{
   max-width: 560px;
   min-width: 290px;
   background: #fff;
-  padding: 4em;
+  padding: 1em;
+  max-height: 630px;
   text-align: center;
   position: relative;
   z-index: 995;
@@ -67,12 +68,9 @@ h1{
 }
 
 /* Content */
-.dialog h2 {
-  margin: 0;
+.dialog h3 {
   font-weight: 400;
   font-size: 2em;
-  padding: 0 0 2em;
-  margin: 0;
 }
 
 .dialog.dialog-open .dialog-content,
