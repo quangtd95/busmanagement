@@ -107,7 +107,7 @@ $(document).ready(function () {
 
         $( "#home-edit-bus-route-btn" ).button().on( "click", function() {
             var cntCheckbox = $(".table-content input:checkbox:checked").length;
-            // console.log(cntCheckbox);
+            var id;
             if (cntCheckbox != 1) {
                 if (cntCheckbox > 1) $("#delete-bus-route h4").html("Không chọn nhiều hơn 1 tuyến xe để sửa!");
                 else $("#delete-bus-route h4").html("Phải chọn 1 tuyến xe để có thể sửa!");
@@ -115,7 +115,8 @@ $(document).ready(function () {
                 $("#delete-bus-route").show();
             } 
             else {
-                // console.log($('.table-content input:checkbox:checked').closest('tr').find('td:nth-child(4) > span:nth-of-type(2) > span:nth-of-type(2)').text());
+                id = $('.table-content input:checkbox:checked').closest('tr').find('td:nth-child(1)').text();
+                
                 $("#home-dialog-destination").val($('.table-content input:checkbox:checked').closest('tr').find('td:nth-child(5) > span:nth-of-type(1) > span:nth-of-type(1)').text());
                 $("#home-dialog-departure-day").val($('.table-content input:checkbox:checked').closest('tr').find('td:nth-child(4) > span:nth-of-type(2) > span:nth-of-type(2)').text());
                 $("#home-dialog-departure-time").val($('.table-content input:checkbox:checked').closest('tr').find('td:nth-child(4) > span:nth-of-type(2) > span:nth-of-type(1)').text());
@@ -129,9 +130,57 @@ $(document).ready(function () {
                 $("#home-dialog-edit-btn").show();
                 $("#home-dialog-cancel-btn").show();    
                 $("#add-bus-route").show();
+                
+                $("#home-dialog-edit-btn").on('click', function() {
+                    ajax_edit(id);
+            });
             }
             $("#home-dialog").removeClass('dialog-close').addClass('dialog-open');
         });
+        
+        function ajax_edit(id){
+            var token = $("meta[name='_csrf']").attr("content");
+                          var header = $("meta[name='_csrf_header']").attr("content");
+            var url = '/busroute/'+id+'/edit';
+            console.log('url = '+url);
+            var data= {
+            		source: "Đà Nẵng-Bến xe TT Đà nẵng",
+                    destination:$("#home-dialog-destination").val(), // Nơi đến: Sài Gòn 
+                    busServiceDestination: $("#home-dialog-bus-service-destination").val(), // Bến xe: Bến xe Miền Đông  
+                    busService:$("#home-dialog-bus-service").val(),	// Nhà xe: ABC 
+                    departureTime: $("#home-dialog-departure-time").val(), // Giờ đi: 7:30   
+                    departureDate: $("#home-dialog-departure-day").val(), // Ngày đi: 21-05-1995 
+                    arrivalTime: $("#home-dialog-arrival-time").val(), // Giờ đến: 8:30  
+                    arrivalDate: $("#home-dialog-arrival-day").val(), // Ngày đến: 21-05-1995
+                    ticketPrice: $("#home-dialog-ticket-price").val(), // Giá tiền: 69000 
+                    totalTickets: $("#home-dialog-total-ticket").val(), // Tổng số vé: 30
+                        };
+
+                    $.ajax({
+                        type: 'POST',
+                        url: '/busroute/'+id+'/edit',
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+                        data: JSON.stringify(data),
+                        traditional: true,
+                        beforeSend: function(xhr){
+                            xhr.setRequestHeader(header, token);
+                        },
+                        success: function(data) {
+                            
+                            console.log(data);
+                            swal({
+                                title: 'Thành công',
+                                text: data.responseText,
+                                type: 'success'
+                                })
+
+                        },
+                        error:function(data){
+                            alert(data.responseText);
+                        }
+                    });
+        }
 
         $( "#home-delete-bus-route-btn" ).button().on( "click", function() {
             var cntCheckbox = $(".table-content input:checkbox:checked").length;
@@ -324,7 +373,7 @@ function showWelcomeLoginSuccess() {
             time += txt[i];
         }
 
-        $('.table-content').find('tr:nth-child(' + idx + ') td:nth-child(4) > span:nth-of-type(2)').html("<span>" + time + "</span> <br/> <span>" + day + "/" + month + "/" + year + "</span>");
+        $('.table-content').find('tr:nth-child(' + idx + ') td:nth-child(4) > span:nth-of-type(2)').html("<span>" + time + "</span> <br/> <span>" + day + "-" + month + "-" + year + "</span>");
 
         //////////////////////////////////////////// DESTINATION
         var txt = $('.table-content').find('tr:nth-child(' + idx + ') td:nth-child(5) > span:nth-of-type(1)').text();
@@ -373,7 +422,7 @@ function showWelcomeLoginSuccess() {
             time += txt[i];
         }
 
-        $('.table-content').find('tr:nth-child(' + idx + ') td:nth-child(5) > span:nth-of-type(2)').html("<span>" + time + "</span> <br/> <span>" + day + "/" + month + "/" + year + "</span>");
+        $('.table-content').find('tr:nth-child(' + idx + ') td:nth-child(5) > span:nth-of-type(2)').html("<span>" + time + "</span> <br/> <span>" + day + "-" + month + "-" + year + "</span>");
     }
 }
 

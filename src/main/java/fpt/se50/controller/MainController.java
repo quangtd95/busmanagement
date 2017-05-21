@@ -90,24 +90,45 @@ public class MainController {
 	    	return new ResponseEntity<String>("Thêm tuyến xe thành công",HttpStatus.OK);
 	    }
 	   
-	    // Sửa tuyến xe - Lấy object từ db gửi lên cho edit-form
-	    @GetMapping("/busroute/{id}/edit")
-	    public String edit(@PathVariable int id, Model model) {
-	        model.addAttribute("edit-form");
-	        model.addAttribute("busRoute", busRouteService.findOne(id));
-	        return "index";
-	    }
-	   
-	    // Lưu tuyến xe: kết quả trả về từ create-form hoặc edit-form
-	    @PostMapping("/busroute/save")
-	    public String save(@Valid BusRoute busRoute, BindingResult result, RedirectAttributes redirect) {
-	        if (result.hasErrors()) {
-	            redirect.addFlashAttribute("unsuccess", "Saved bus route unsuccessfully!");
-	            return "redirect:/index";
-	        }
-	        busRouteService.save(busRoute);
-	        redirect.addFlashAttribute("success", "Saved bus route successfully!");
-	        return "redirect:/index";
+	    // Sửa tuyến xe 
+	    @PostMapping("/busroute/{id}/edit")
+	    public @ResponseBody ResponseEntity<String> edit(@PathVariable int id, @RequestBody AddBusRoute addBusRoute) {
+	    	
+	    	BusRoute busRoute = busRouteService.findOne(id);
+	    	busRoute.setSource(addBusRoute.getSource());
+	    	busRoute.setDestination(addBusRoute.getDestination() + "-"
+	    						+ addBusRoute.getBusServiceDestination());
+	    	
+	    	try {
+	    		DateFormat format = new SimpleDateFormat("dd-MM-yyyy HH:mm");
+	    		
+	    		java.util.Date departureDatetime = (java.util.Date) format.parse(addBusRoute.getDepartureDate() + " " + addBusRoute.getDepartureTime());
+	    		java.sql.Timestamp timestamp = new java.sql.Timestamp(departureDatetime.getTime());
+				busRoute.setDepartureTime(timestamp);
+				
+				java.util.Date arrivalDateTime = (java.util.Date) format.parse(addBusRoute.getArrivalDate() + " " + addBusRoute.getArrivalTime());
+				timestamp = new java.sql.Timestamp(arrivalDateTime.getTime());
+				busRoute.setArrivalTime(timestamp);
+				
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
+	    	
+	    	busRoute.setTotalTickets(Integer.parseInt(addBusRoute.getTotalTickets()));
+	    	busRoute.setTicketPrice(Integer.parseInt(addBusRoute.getTicketPrice()));
+	    	BusService busSv = busSvSv.findByName(addBusRoute.getBusService());
+	    	System.out.println("."+addBusRoute.getBusService()+".");
+	    	if (busSv == null) {
+	    		
+	    		System.out.println("Can't find bus service");
+	    	}
+	    	if (busSv != null) {
+	    		busRoute.setBusService(busSv);
+	    	}
+	    
+	    	busRouteService.save(busRoute);
+	    	
+	    	return new ResponseEntity<String>("Sửa tuyến xe thành công",HttpStatus.OK);
 	    }
 	    
 	    // Xoá tuyến xe
