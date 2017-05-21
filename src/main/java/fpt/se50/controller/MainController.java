@@ -2,6 +2,7 @@ package fpt.se50.controller;
 
 
 import java.sql.Date;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -49,33 +50,42 @@ public class MainController {
 	    
 	    // Thêm tuyến xe
 	    @PostMapping("/busroute/add")
-	    public @ResponseBody ResponseEntity<String> add(@RequestBody AddBusRoute addBusRoute ) {
+	    public @ResponseBody ResponseEntity<String> add(@RequestBody AddBusRoute addBusRoute) {
 	    	
 	    	BusRoute busRoute = new BusRoute();
 	    	busRoute.setSource(addBusRoute.getSource());
 	    	busRoute.setDestination(addBusRoute.getDestination() + "-"
 	    						+ addBusRoute.getBusServiceDestination());
-//	    	String format = "2011-01-18 00:00:00.0";
+	    	
 	    	try {
-				Date departure = (Date) new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.S")
-						.parse(addBusRoute.getDepartureDate() + " "
-								+addBusRoute.getDepartureTime());
-				Date arrival = (Date) new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.S")
-						.parse(addBusRoute.getArrivalDate() + " "
-								+addBusRoute.getArrivalTime());
+	    		DateFormat format = new SimpleDateFormat("dd-MM-yyyy HH:mm");
+	    		
+	    		java.util.Date departureDatetime = (java.util.Date) format.parse(addBusRoute.getDepartureDate() + " " + addBusRoute.getDepartureTime());
+	    		java.sql.Timestamp timestamp = new java.sql.Timestamp(departureDatetime.getTime());
+				busRoute.setDepartureTime(timestamp);
 				
-				busRoute.setDepartureTime(departure);
-				busRoute.setArrivalTime(arrival);
+				java.util.Date arrivalDateTime = (java.util.Date) format.parse(addBusRoute.getArrivalDate() + " " + addBusRoute.getArrivalTime());
+				timestamp = new java.sql.Timestamp(arrivalDateTime.getTime());
+				busRoute.setArrivalTime(timestamp);
+				
 			} catch (ParseException e) {
 				e.printStackTrace();
 			}
 	    	
-	    	busRoute.setRemainingTickets(Integer.parseInt(addBusRoute.getRemainingTicket()));
+	    	busRoute.setRemainingTickets(Integer.parseInt(addBusRoute.getTotalTickets()));
 	    	busRoute.setTotalTickets(Integer.parseInt(addBusRoute.getTotalTickets()));
 	    	busRoute.setTicketPrice(Integer.parseInt(addBusRoute.getTicketPrice()));
 	    	BusService busSv = busSvSv.findByName(addBusRoute.getBusService());
-	    	if (busSv != null)
+	    	System.out.println("."+addBusRoute.getBusService()+".");
+	    	if (busSv == null) {
+	    		
+	    		System.out.println("Can't find bus service");
+	    	}
+	    	if (busSv != null) {
 	    		busRoute.setBusService(busSv);
+	    	}
+	    
+	    	busRouteService.save(busRoute);
 	    	
 	    	return new ResponseEntity<String>("Thêm tuyến xe thành công",HttpStatus.OK);
 	    }

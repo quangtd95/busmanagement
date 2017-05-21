@@ -58,50 +58,48 @@ $(document).ready(function () {
 
             /////////////EVENT////////////////////
             $("#home-dialog-add-btn").on('click',function(){
-             var token = $("meta[name='_csrf']").attr("content");
-             var header = $("meta[name='_csrf_header']").attr("content");
+          	  var token = $("meta[name='_csrf']").attr("content");
+              var header = $("meta[name='_csrf_header']").attr("content");
+               
+              var data= {
+            	  source: "Đà Nẵng-Bến xe TT Đà nẵng",
+                  destination:$("#home-dialog-destination").val(), // Nơi đến: Sài Gòn 
+                  busServiceDestination: $("#home-dialog-bus-service-destination").val(), // Bến xe: Bến xe Miền Đông  
+                  busService:$("#home-dialog-bus-service").val(),	// Nhà xe: ABC 
+                  departureTime: $("#home-dialog-departure-time").val(), // Giờ đi: 7:30   
+                  departureDate: $("#home-dialog-departure-day").val(), // Ngày đi: 21-05-1995 
+                  arrivalTime: $("#home-dialog-arrival-time").val(), // Giờ đến: 8:30  
+                  arrivalDate: $("#home-dialog-arrival-day").val(), // Ngày đến: 21-05-1995
+                  ticketPrice: $("#home-dialog-ticket-price").val(), // Giá tiền: 69000 
+                  totalTickets: $("#home-dialog-total-ticket").val(), // Tổng số vé: 30
+              };
+          $.ajax({
+              type: 'POST',
+              url: '/busroute/add',
+              contentType: "application/json; charset=utf-8",
+              dataType: "json",
+              data: JSON.stringify(data),
+              traditional: true,
+              beforeSend: function(xhr){
+                  xhr.setRequestHeader(header, token);
+              },
+              success: function(data) {
+                  
+                  console.log(data);
+                  swal({
+                      title: 'Thành công',
+                      text: data.responseText,
+                      type: 'success'
+                      }).then(function(){
+                          window.location.replace("/");
+                      })
 
-             var data= {
-               source: "Đà Nẵng-Bến xe TT Đà nẵng",
-               destination:$("#home-dialog-destination").val(),
-               busServiceDestination: $("home-dialog-bus-service-destination").val(),
-               busService:$("#home-dialog-bus-service").val(),
-               departureTime: $("home-dialog-departure-time").val(),
-               departureDate: "",
-               arrivalTime: $("home-dialog-arrival-time").val(),
-               arrivalDate: "",
-               ticketPrice: $("home-dialog-ticket-price").val(),
-               totalTickets: "",
-               remainingTicket: $("home-dialog-remaining-ticket").val(),
-               contact: $("home-dialog-contact").val()
-           };
-           $.ajax({
-            type: 'POST',
-            url: '/busroute/add',
-            contentType: "application/json; charset=utf-8",
-            dataType: "json",
-            data: JSON.stringify(data),
-            traditional: true,
-            beforeSend: function(xhr){
-                xhr.setRequestHeader(header, token);
-            },
-            success: function(data) {
-
-                console.log(data);
-                swal({
-                    title: 'Thành công',
-                    text: data.responseText,
-                    type: 'success'
-                }).then(function(){
-                    window.location.replace("/");
-                })
-
-            },
-            error:function(data){
-               alert(data.responseText);
-           }
-       });
-       });
+              },
+              error:function(data){
+              	alert(data.responseText);
+              }
+          });
+          });
 
 
             /////////////EVENT////////////////////
