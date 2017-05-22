@@ -44,6 +44,18 @@ public class MainController {
 			System.out.println(source+" "+destination+" "+busService);
 			System.out.println(busRoutes.size());
 			model.addAttribute("busRoutes", busRoutes);
+			String message = "";
+			if (busRoutes.isEmpty() && (source!=null || destination!= null || busRoutes!=null)) {
+				message = "empty!";
+				model.addAttribute("message",message);
+			} else 
+			if (!busRoutes.isEmpty() && (source!=null || destination!= null || busRoutes!=null)) {
+				message = "có "+busRoutes.size() +" kết quả!";
+				model.addAttribute("message",message);
+			} else {
+				model.addAttribute("message",message);
+			}
+			System.out.println(message);
 			return "index";
 			
 		}

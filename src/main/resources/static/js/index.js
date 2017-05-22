@@ -4,6 +4,24 @@ $(window).on("load resize ", function() {
 }).resize();
 
 $(document).ready(function () {
+	
+	var message = $("#message").val();
+	console.log(message);
+	if (message==""){
+		
+	} else if (message=="empty!"){
+		 swal({
+             title: 'Oops',
+             text: "không tìm thấy kết quả nào!",
+             type: 'error'
+         });
+	} else {
+		 swal({
+             title: 'Đã tìm thấy',
+             text: message,
+             type: 'success'
+         });
+	}
 
     if (getUrlParameter("true") != null) {
         showWelcomeLoginSuccess();
