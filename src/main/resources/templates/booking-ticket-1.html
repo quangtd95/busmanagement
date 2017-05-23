@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Booking ticket</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../static/css/bookingticket1.css"/>
+</head>
+<body>    
+    <h2>BUS BOOKING TICKET</h2>
+    <hr/>  
+    <form name = "form1" action="" method = "post" class="form">    
+        <div class = "container">    
+            <div class = "form_group">    
+                <label>Nhà xe:</label>    
+                <input type="text" name="nhaxe" value= "" required/>    
+            </div>    
+            <div class = "form_group">    
+                <label>Từ:</label>    
+                <input type="text" name ="bendi" value = "Đà Nẵng" readonly />    
+            </div>    
+            <div class = "form_group">    
+                <label>Đến:</label>    
+                <input type = "text" name = "benden" value = "" required/>    
+            </div>    
+            <div class = "form_group">    
+                <label>Ngày xuất bến:</label>    
+                <input type = "text" name = "ngayden" value = "" required/>    
+            </div>
+            <div class = "form_group">    
+                <label>Giờ xuất bến:</label>    
+                <input type = "text" name = "gioden" value = "" required/>    
+            </div>  
+            <div class = "form_group">    
+                <label>Giá vé:</label>    
+                <input type = "text" name = "giave" value = "" required/>    
+            </div>
+            <div class = "form_group">    
+                <label>Số lượng vé:</label>    
+                <input type = "number" name = "soluong" min="0" max="10" required/>    
+            </div>
+            <div class = "form_group">    
+                <label>Tổng tiền:</label>    
+                <input type = "text" name = "tongtien" value = "" required/>    
+            </div>
+            <div class="form_button">
+                <input type="button" value="Huỷ" class="submit">
+                <input type="submit" value="Tiếp" class="submit">   
+            </div>     
+        </div>    
+    </form>    
+</body>
+</html>    
