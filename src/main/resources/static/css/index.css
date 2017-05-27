@@ -341,3 +341,22 @@ td:nth-child(8), th:nth-child(8) { width: 100px; }
 #home-dialog-booking .input-group {
   margin: 0;
 }
+
+#home-dialog-destination-error, 
+#home-dialog-departure-day-error, #home-dialog-departure-time-error,
+#home-dialog-arrival-day-error, #home-dialog-arrival-time-error
+{
+	position: fixed;
+	font-size: 14px;
+	margin-top: 16px;
+	color: red;
+}
+
+#home-dialog-bus-service-error, #home-dialog-bus-service-destination-error, 
+#home-dialog-ticket-price-error, #home-dialog-total-ticket-error
+{
+	position: fixed;
+	font-size: 14px;
+	margin-top: -40px;
+	color: red;
+}

@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <th:block th:replace="master::head"></th:block>
-<title>Trang chu</title>
+<title>Homepage</title>
 <script src="../static/js/index.js" th:src="@{/js/index.js}"></script>
 </head>
 
@@ -132,17 +132,18 @@
 
 			<div id="add-bus-route">
 				<h3>TUYẾN XE</h3>
-				<form class="navbar-form">
+				<form class="navbar-form" id="dialog-form">
+				<fieldset>
 					<!-- <span class="form-field-name">TUYẾN XE</span> -->
 					<!-- <br/> -->
 					<div class="input-group add-on">
 						<div class="form-group">
 							<input class="form-control" type="text" placeholder="ĐÀ NẴNG"
-								disabled="true" />
+								disabled="true"/>
 						</div>
 						<div class="form-group">
 							<input class="form-control" type="text" placeholder="Nơi đến"
-								id="home-dialog-destination" />
+								id="home-dialog-destination" name="name_home_dialog_destination" />
 						</div>
 					</div>
 					<br />
@@ -150,11 +151,11 @@
 					<div class="input-group add-on">
 						<div class="form-group">
 							<input class="form-control" type="text" placeholder="Ngày đi"
-								id="home-dialog-departure-day" />
+								id="home-dialog-departure-day" name="name_home_dialog_departure_day"/>
 						</div>
 						<div class="form-group">
 							<input class="form-control" type="text" placeholder="Giờ đi"
-								id="home-dialog-departure-time" />
+								id="home-dialog-departure-time" name="name_home_dialog_departure_time"/>
 						</div>
 					</div>
 					<br />
@@ -162,11 +163,11 @@
 					<div class="input-group add-on">
 						<div class="form-group">
 							<input class="form-control" type="text" placeholder="Ngày đến"
-								id="home-dialog-arrival-day" />
+								id="home-dialog-arrival-day" name="name_home_dialog_arrival_day" />
 						</div>
 						<div class="form-group">
 							<input class="form-control" type="text" placeholder="Giờ đến"
-								id="home-dialog-arrival-time" />
+								id="home-dialog-arrival-time" name="name_home_dialog_arrival_time"/>
 						</div>
 					</div>
 					<br />
@@ -174,7 +175,7 @@
 					<div class="input-group add-on">
 						<div class="form-group">
 							<input class="form-control1" type="text" placeholder="Nhà xe"
-								id="home-dialog-bus-service" />
+								id="home-dialog-bus-service" name="name_home_dialog_bus_service"/>
 						</div>
 					</div>
 					<br />
@@ -182,7 +183,7 @@
 					<div class="input-group add-on">
 						<div class="form-group">
 							<input class="form-control1" type="text" placeholder="Bến xe"
-								id="home-dialog-bus-service-destination" />
+								id="home-dialog-bus-service-destination" name="name_home_dialog_bus_service_destination" />
 						</div>
 					</div>
 
@@ -191,7 +192,7 @@
 					<div class="input-group add-on">
 						<div class="form-group">
 							<input class="form-control1" type="text" placeholder="Giá tiền"
-								id="home-dialog-ticket-price" />
+								id="home-dialog-ticket-price" name="name_home_dialog_ticket_price"/>
 						</div>
 					</div>
 
@@ -200,7 +201,7 @@
 					<div class="input-group add-on">
 						<div class="form-group">
 							<input class="form-control1" type="text" placeholder="Tổng số vé"
-								id="home-dialog-total-ticket" />
+								id="home-dialog-total-ticket" name="name_home_dialog_total_ticket"/>
 						</div>
 					</div>
 
@@ -209,19 +210,23 @@
 					<div class="input-group add-on">
 						<div class="form-group">
 							<input class="form-control1" type="text"
-								placeholder="Số điện thoại" id="home-dialog-contact" />
+								placeholder="Số điện thoại" id="home-dialog-contact" name="name_home_dialog_contact" />
 						</div>
 					</div>
+					<div>
+						<input class="btn" id="home-dialog-add-btn" type="submit" value="Thêm"/>
+						<a href="#" class="btn home-dialog-close" id="home-dialog-cancel-btn">Huỷ</a>
+						<input class="btn" id="home-dialog-edit-btn" type="submit" value="Sửa"/> 
+					</div>
+					</fieldset>
 				</form>
 			</div>
 
 			<div>
-				<a href="#" class="btn" id="home-dialog-add-btn">Thêm</a> <a
-					href="#" class="btn" id="home-dialog-edit-btn">Sửa</a> <a href="#"
-					class="btn" id="home-dialog-delete-btn">Xóa</a> <a href="#"
-					class="btn home-dialog-close" id="home-dialog-cancel-btn">Huỷ</a> <a
-					href="#" class="btn home-dialog-close" id="home-dialog-ok-btn">OK</a>
+				<a href="#" class="btn" id="home-dialog-delete-btn">Xóa</a> 
+				<a href="#" class="btn home-dialog-close" id="home-dialog-ok-btn">OK</a>
 			</div>
+			
 		</div>
 	</div>
 
@@ -248,6 +253,5 @@
 
 	</main>
 	<footer th:replace="master::footer"></footer>
-	>>>>>>> quang-busservice-page
 </body>
 </html>
