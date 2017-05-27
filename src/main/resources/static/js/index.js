@@ -81,63 +81,93 @@ $(document).ready(function () {
             	// validate
                 $("#dialog-form").validate({
             		rules:{
-            			name_home_dialog_destination: { required: true }, 
+            			name_home_dialog_destination: { 
+            				required: true,
+            				maxlength: 100
+            			}, 
             			name_home_dialog_departure_day: {
             				required: true,
-            				dateITA: true
+            				dateITA: true,
+            				maxlength: 100
             			}, 
             			name_home_dialog_departure_time: {
             				required: true,
-            				time: true
+            				time: true, 
+            				maxlength: 100
             			}, 
             			name_home_dialog_arrival_day: {
             				required: true,
-            				dateITA: true
+            				dateITA: true, 
+            				maxlength: 100
             			}, 
             			name_home_dialog_arrival_time: {
             				required: true,
-            				time: true
+            				time: true, 
+            				maxlength: 100
             			}, 
-            			name_home_dialog_bus_service: { required: true }, 
-            			name_home_dialog_bus_service_destination: { required: true }, 
+            			name_home_dialog_bus_service: { 
+            				required: true, 
+            				maxlength: 100
+            			}, 
+            			name_home_dialog_bus_service_destination: { 
+            				required: true, 
+            				maxlength: 100
+            			}, 
             			name_home_dialog_ticket_price: {
             				required: true, 
-            				digits: true
+            				digits: true, 
+            				maxlength: 100
             			}, 
             			name_home_dialog_total_ticket: {
             				required: true, 
             				digits: true,
-            				range: [10, 80]
+            				range: [10, 80], 
+            				maxlength: 100
             			}
             		}, 
             		messages: {
-            			name_home_dialog_destination: { required: "must fill" },
+            			name_home_dialog_destination: { 
+            				required: "must fill",
+            				maxlength: "maxlen 100"
+            			},
             			name_home_dialog_departure_day: {
             				required: "must fill",
-            				dateITA: "dd/mm/yyyy"
+            				dateITA: "dd/mm/yyyy", 
+            				maxlength: "maxlen 100"
             			}, 
             			name_home_dialog_departure_time: {
             				required: "must fill",
-            				time: "hh:mm"
+            				time: "hh:mm", 
+            				maxlength: "maxlen 100"
             			}, 
             			name_home_dialog_arrival_day: {
             				required: "must fill",
-            				dateITA: "dd/mm/yyyy"
+            				dateITA: "dd/mm/yyyy", 
+            				maxlength: "maxlen 100"
             			}, 
             			name_home_dialog_arrival_time: {
             				required: "must fill",
-            				time: "hh:mm"
+            				time: "hh:mm", 
+            				maxlength: "maxlen 100"
             			}, 
-            			name_home_dialog_bus_service: { required: "must fill" }, 
-            			name_home_dialog_bus_service_destination: { required: "must fill" }, 
+            			name_home_dialog_bus_service: { 
+            				required: "must fill", 
+            				maxlength: "maxlen 100"
+            			}, 
+            			name_home_dialog_bus_service_destination: { 
+            				required: "must fill",
+            				maxlength: "maxlen 100"
+            			}, 
             			name_home_dialog_ticket_price: {
             				required: "must fill",
-            				digits: "integer"
+            				digits: "integer", 
+            				maxlength: "maxlen 100"
             			}, 
             			name_home_dialog_total_ticket: {
             				required: "must fill",
             				digits: "integer",
-            				range: "10 to 80"
+            				range: "10 to 80", 
+            				maxlength: "maxlen 100"
             			}
             		},
             		submitHandler: function(form) {
@@ -232,63 +262,93 @@ $(document).ready(function () {
         	// validate
             $("#dialog-form").validate({
         		rules:{
-        			name_home_dialog_destination: { required: true }, 
+        			name_home_dialog_destination: { 
+        				required: true, 
+        				maxlength: 100
+        			}, 
         			name_home_dialog_departure_day: {
         				required: true,
-        				dateITA: true
+        				dateITA: true, 
+        				maxlength: 100
         			}, 
         			name_home_dialog_departure_time: {
         				required: true,
-        				time: true
+        				time: true,
+        				maxlength: 100
         			}, 
         			name_home_dialog_arrival_day: {
         				required: true,
-        				dateITA: true
+        				dateITA: true,
+        				maxlength: 100
         			}, 
         			name_home_dialog_arrival_time: {
         				required: true,
-        				time: true
+        				time: true,
+        				maxlength: 100
         			}, 
-        			name_home_dialog_bus_service: { required: true }, 
-        			name_home_dialog_bus_service_destination: { required: true }, 
+        			name_home_dialog_bus_service: { 
+        				required: true, 
+        				maxlength: 100
+        			}, 
+        			name_home_dialog_bus_service_destination: {
+        				required: true,
+        				maxlength: 100
+        			}, 
         			name_home_dialog_ticket_price: {
         				required: true, 
-        				digits: true
+        				digits: true,
+        				maxlength: 100
         			}, 
         			name_home_dialog_total_ticket: {
         				required: true, 
         				digits: true,
-        				range: [10, 80]
+        				range: [10, 80],
+        				maxlength: 100
         			}
         		}, 
         		messages: {
-        			name_home_dialog_destination: { required: "must fill" },
+        			name_home_dialog_destination: { 
+        				required: "must fill",
+        				maxlength: "maxlen 100"
+        			},
         			name_home_dialog_departure_day: {
         				required: "must fill",
-        				dateITA: "dd/mm/yyyy"
+        				dateITA: "dd/mm/yyyy",
+        				maxlength: "maxlen 100"
         			}, 
         			name_home_dialog_departure_time: {
         				required: "must fill",
-        				time: "hh:mm"
+        				time: "hh:mm",
+        				maxlength: "maxlen 100"
         			}, 
         			name_home_dialog_arrival_day: {
         				required: "must fill",
-        				dateITA: "dd/mm/yyyy"
+        				dateITA: "dd/mm/yyyy",
+        				maxlength: "maxlen 100"
         			}, 
         			name_home_dialog_arrival_time: {
         				required: "must fill",
-        				time: "hh:mm"
+        				time: "hh:mm",
+        				maxlength: "maxlen 100"
         			}, 
-        			name_home_dialog_bus_service: { required: "must fill" }, 
-        			name_home_dialog_bus_service_destination: { required: "must fill" }, 
+        			name_home_dialog_bus_service: { 
+        				required: "must fill",
+        				maxlength: "maxlen 100"
+        			}, 
+        			name_home_dialog_bus_service_destination: { 
+        				required: "must fill",
+        				maxlength: "maxlen 100"
+        			}, 
         			name_home_dialog_ticket_price: {
         				required: "must fill",
-        				digits: "integer"
+        				digits: "integer",
+        				maxlength: "maxlen 100"
         			}, 
         			name_home_dialog_total_ticket: {
         				required: "must fill",
         				digits: "integer",
-        				range: "10 to 80"
+        				range: "10 to 80",
+        				maxlength: "maxlen 100"
         			}
         		},
         		submitHandler: function(form) {
