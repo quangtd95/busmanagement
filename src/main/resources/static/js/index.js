@@ -168,7 +168,7 @@ $(document).ready(function () {
                            },
                            success: function(data) {
 
-                               console.log(data);
+                               
                                swal({
                                    title: 'Thành công',
                                    text: data.responseText,
@@ -176,10 +176,13 @@ $(document).ready(function () {
                                }).then(function(){
                                    window.location.replace("/");
                                })
+                               
+                               window.location.reload();
 
                            },
                            error:function(data){
                               alert(data.responseText);
+                              window.location.reload();
                           }
                       });
             		}
@@ -324,10 +327,12 @@ $(document).ready(function () {
                     			text: data.responseText,
                     			type: 'success'
                     		})
-
+                    		
+                    		window.location.reload();
                     	},
                     	error:function(data){
                     		alert(data.responseText);
+                            window.location.reload();
                     	}
                     });
         		}
