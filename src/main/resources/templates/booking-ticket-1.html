@@ -1,50 +1,72 @@
-<!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Booking ticket</title>
-    <meta charset="utf-8">
-    <link rel="stylesheet" href="../static/css/bookingticket1.css"/>
+	  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+		   <meta th:name="_csrf" th:content="${_csrf.token}"/>
+    <meta th:name="_csrf_header" th:content="${_csrf.headerName}"/>
+    
+           <!-- SweetAlert2 -->
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/sweetalert2/6.4.2/sweetalert2.min.css"
+          th:href="@{/webjars/sweetalert2/6.4.2/dist/sweetalert2.min.css}"/>
+    <script th:src="@{/webjars/sweetalert2/6.4.2/dist/sweetalert2.min.js}"
+            src="https://cdn.jsdelivr.net/sweetalert2/6.4.2/sweetalert2.min.js"></script>
+    <!--  -->
+    <script
+            src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+    <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.16.0/jquery.validate.min.js"></script>
+    <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/json2/20160511/json2.js"></script>
+
+    <script
+            src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.0/additional-methods.js"></script>
+
+    <link rel="stylesheet" href="../static/css/bookingticket1.css" th:href="@{/css/bookingticket1.css}"
+    />
+    <script type="text/javascript" src="../static/js/booking-ticket-1.js" th:src="@{/js/booking-ticket-1.js}"></script>
 </head>
 <body>    
     <h2>BUS BOOKING TICKET</h2>
     <hr/>  
-    <form name = "form1" action="" method = "post" class="form">    
+    <form id="form1" name = "form1" action="" method = "post" class="form">    
         <div class = "container">    
+        <input type="text" id="id" style="display:none" th:value="${busRoute.id}"/>
             <div class = "form_group">    
                 <label>Nhà xe:</label>    
-                <input type="text" name="nhaxe" value= "" required/>    
+                <input type="text" name="nhaxe" th:value= "${busRoute.getBusService().getName()}" readonly="readonly"/>    
             </div>    
             <div class = "form_group">    
                 <label>Từ:</label>    
-                <input type="text" name ="bendi" value = "Đà Nẵng" readonly />    
+                <input type="text" name ="bendi" value = "Đà Nẵng" readonly="readonly" />    
             </div>    
             <div class = "form_group">    
                 <label>Đến:</label>    
-                <input type = "text" name = "benden" value = "" required/>    
+                <input type = "text" name = "benden" th:value = "${busRoute.getDestination()}" readonly="readonly"/>    
             </div>    
             <div class = "form_group">    
                 <label>Ngày xuất bến:</label>    
-                <input type = "text" name = "ngayden" value = "" required/>    
+                <input type = "text" id="ngaydi" th:value = "${busRoute.getArrivalTime()}" readonly="readonly"/>    
             </div>
             <div class = "form_group">    
                 <label>Giờ xuất bến:</label>    
-                <input type = "text" name = "gioden" value = "" required/>    
+                <input type = "text" id="giodi" th:value = "${busRoute.getArrivalTime()}" readonly="readonly"/>    
             </div>  
             <div class = "form_group">    
                 <label>Giá vé:</label>    
-                <input type = "text" name = "giave" value = "" required/>    
+                <input id="giave" type = "text" name = "giave" th:value = "${busRoute.getTicketPrice()}" readonly="readonly"/>    
             </div>
             <div class = "form_group">    
                 <label>Số lượng vé:</label>    
-                <input type = "number" name = "soluong" min="0" max="10" required/>    
+                <input id="soluongve" type = "number" name = "soluong" min="0" max="10" value="0" required="required"/>    
             </div>
             <div class = "form_group">    
                 <label>Tổng tiền:</label>    
-                <input type = "text" name = "tongtien" value = "" required/>    
+                <input id="tongtien" type = "text" name = "tongtien" value = "0" readonly="readonly"/>    
             </div>
             <div class="form_button">
-                <input type="button" value="Huỷ" class="submit">
-                <input type="submit" value="Tiếp" class="submit">   
+                <a th:href="@{/}"><button type="button" class="submit">Huỷ</button></a>
+                <input type="submit" value="Tiếp" class="submit"/>   
             </div>     
         </div>    
     </form>    

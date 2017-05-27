@@ -37,7 +37,6 @@ $(document).ready(function () {
         myUrl +='&busService=';
         myUrl +=$('#searchBusService').val(),
         window.location.replace(myUrl);
-        console.log(myUrl);
     });
 
     
@@ -451,7 +450,8 @@ function showWelcomeLoginSuccess() {
             location.href=location.href.replace("?true", "");
         });
     }
-    function logout() {
+
+function logout() {
         swal({
             title: 'Đăng xuất?',
             text: "Bạn sẽ không còn quyền admin!",

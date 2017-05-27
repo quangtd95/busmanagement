@@ -6,14 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import fpt.se50.entity.BusService;
-import fpt.se50.repository.BusServiceRepository;
+import fpt.se50.repository.BusServiceRepo;
 
 @Service
 public class BusSvImpl implements BusServiceService
 {
-
 	@Autowired
-	private BusServiceRepository busSvRepo;
+	private BusServiceRepo busSvRepo;
 	@Override
 	public BusService findByName(String name) {
 		return busSvRepo.findByName(name);

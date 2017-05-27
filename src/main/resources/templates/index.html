@@ -109,12 +109,12 @@
 									đến: <span th:text="${busRoute.arrivalTime}"></span> <br /></td>
 								<td><span th:text="${busRoute.ticketPrice}"></span>đ<br />Còn
 									<span th:text="${busRoute.remainingTickets}"></span> vé<br />
-									<button type="button" class="btn">Đặt vé</button></td>
+									<a th:href="@{/book/} + ${busRoute.id}"><button type="button" class="btn">Đặt vé</button></a></td>
 								<td><span th:text="${busRoute.busService.phoneNumber}"></span></td>
 								<td>
 									<div class="checkbox">
 										<label><input type="checkbox" value="" /></label>
-									</div>
+									</div>F
 								</td>
 							</tr>
 						</th:block>

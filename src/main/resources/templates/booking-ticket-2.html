@@ -1,44 +1,69 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Booking ticket</title>
-    <meta charset="utf-8">
-    <link rel="stylesheet" href="../static/css/bookingticket1.css"/>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta th:name="_csrf" th:content="${_csrf.token}"/>
+    <meta th:name="_csrf_header" th:content="${_csrf.headerName}"/>
+           <!-- SweetAlert2 -->
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/sweetalert2/6.4.2/sweetalert2.min.css"
+          th:href="@{/webjars/sweetalert2/6.4.2/dist/sweetalert2.min.css}"/>
+    <script th:src="@{/webjars/sweetalert2/6.4.2/dist/sweetalert2.min.js}"
+            src="https://cdn.jsdelivr.net/sweetalert2/6.4.2/sweetalert2.min.js"></script>
+    <!--  -->
+    <script
+            src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+    <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.16.0/jquery.validate.min.js"></script>
+    <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/json2/20160511/json2.js"></script>
+
+    <script
+            src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.0/additional-methods.js"></script>
+
+    <link rel="stylesheet" href="../static/css/bookingticket1.css" th:href="@{/css/bookingticket1.css}
+    "/>
+
+     <script type="text/javascript" src="../static/js/booking-ticket-2.js" th:src="@{/js/booking-ticket-2.js}"></script>
 </head>
 <body>    
     <h2>BUS BOOKING TICKET</h2>
     <hr/>  
-    <form name = "form2" action="" method = "post" class="form">    
+    <form id="form2" name = "form2" action="" method = "post" class="form">    
         <div class = "container">    
-            <div class = "form_group">    
-                <label>Họ và tên: </label>    
-                <input type="text" name="hoten" value= "" required/>    
-            </div>    
-            <div class = "form_group">    
-                <label>Ngày sinh:</label>    
-                <input type="text" name ="ngaysinh" value = "" required />    
-            </div>    
-            <div class = "form_group">    
-                <label>Số CMND:</label>    
-                <input type = "text" name = "cmnd" value = "" required/>    
-            </div>    
-            <div class = "form_group">    
-                <label>Địa chỉ:</label>    
-                <input type = "text" name = "diachi" value = "" required/>    
-            </div>
-            <div class = "form_group">    
-                <label>Email:</label>    
-                <input type = "text" name = "email" value = "" required/>    
-            </div>  
-            <div class = "form_group">    
-                <label>Điện thoại:</label>    
-                <input type = "text" name = "dienthoai" value = "" required/>    
-            </div>
-            <div class="form_button">
-                <input type="button" value="Huỷ" class="submit"/>
-                <input type="submit" value="Xác nhận" class="submit"/>   
-            </div>     
+           <input type="text" id="number" style="display:none" th:value="${number}"/>
+           <input type="text" id="ticketId" style="display:none" th:value="${id}"/>
+           <div class = "form_group">    
+            <label>Họ và tên: </label>    
+            <input type="text" id="hoten" value= "" required="required"/>    
         </div>    
-    </form>    
+        <div class = "form_group">    
+            <label>Ngày sinh:</label>    
+            <input type="text" id ="ngaysinh" value = "" required="required" />    
+        </div>    
+        <div class = "form_group">    
+            <label>Số CMND:</label>    
+            <input type = "text" id = "cmnd" value = "" required="required"/>    
+        </div>    
+        <div class = "form_group">    
+            <label>Địa chỉ:</label>    
+            <input type = "text" id = "diachi" value = "" required="required"/>    
+        </div>
+        <div class = "form_group">    
+            <label>Email:</label>    
+            <input type = "text" id = "email" value = "" required="required"/>    
+        </div>  
+        <div class = "form_group">    
+            <label>Điện thoại:</label>    
+            <input type = "text" id = "dienthoai" value = "" required="required"/>    
+        </div>
+        <div class="form_button">
+           <a th:href="@{/}"><button type="button" class="submit">Huỷ</button></a>
+           <input type="submit" value="Xác nhận" class="submit"/>   
+       </div>     
+   </div>    
+</form>    
 </body>
 </html>    
