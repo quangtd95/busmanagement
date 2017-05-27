@@ -37,6 +37,7 @@ $(document).ready(function () {
         myUrl +='&busService=';
         myUrl +=$('#searchBusService').val(),
         window.location.replace(myUrl);
+        console.log(myUrl);
     });
 
     

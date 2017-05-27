@@ -45,11 +45,11 @@ public class MainController {
 			System.out.println(busRoutes.size());
 			model.addAttribute("busRoutes", busRoutes);
 			String message = "";
-			if (busRoutes.isEmpty() && (source!=null || destination!= null || busRoutes!=null)) {
+			if (busRoutes.isEmpty() && (source!=null || destination!= null || busService!=null)) {
 				message = "empty!";
 				model.addAttribute("message",message);
 			} else 
-			if (!busRoutes.isEmpty() && (source!=null || destination!= null || busRoutes!=null)) {
+			if (!busRoutes.isEmpty() && (source!=null || destination!= null || busService!=null)) {
 				message = "có "+busRoutes.size() +" kết quả!";
 				model.addAttribute("message",message);
 			} else {
