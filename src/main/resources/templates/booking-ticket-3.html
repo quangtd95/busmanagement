@@ -2,30 +2,55 @@
 <html>
 <head>
     <title>Booking ticket</title>
-    <meta charset="utf-8">
-    <link rel="stylesheet" href="../static/css/bookingticket1.css"/>
+    <meta charset="utf-8"/>
+           <!-- SweetAlert2 -->
+            <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta th:name="_csrf" th:content="${_csrf.token}"/>
+    <meta th:name="_csrf_header" th:content="${_csrf.headerName}"/>
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/sweetalert2/6.4.2/sweetalert2.min.css"
+          th:href="@{/webjars/sweetalert2/6.4.2/dist/sweetalert2.min.css}"/>
+    <script th:src="@{/webjars/sweetalert2/6.4.2/dist/sweetalert2.min.js}"
+            src="https://cdn.jsdelivr.net/sweetalert2/6.4.2/sweetalert2.min.js"></script>
+    <!--  -->
+    <script
+            src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+    <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.16.0/jquery.validate.min.js"></script>
+    <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/json2/20160511/json2.js"></script>
+
+    <script
+            src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.0/additional-methods.js"></script>
+
+    <link rel="stylesheet" href="../static/css/bookingticket1.css" th:href="@{/css/bookingticket1.css}"/>
+    <script type="text/javascript" src="../static/js/booking-ticket-3.js" th:src="@{/js/booking-ticket-3.js}"></script>
 </head>
 <body>    
     <h2>BUS BOOKING TICKET</h2>
     <hr/>
-
+    <input type="text" id="error" style="display: none" th:value="${error}"/>
+    <th:block th:unless="${error}">
     <table border="1">
     <CAPTION>THÔNG TIN VÉ ĐÃ ĐẶT</CAPTION>
     <TR><TH>Nhà xe</TH><TH>Tuyến đường</TH><TH>Giờ xuất bến</TH><TH>Số lượng vé</TH><TH>Tổng tiền</TH></TR>
-    <TR><TD>Phương Trang</TD><TD>Đà Nẵng - Hà Nội</TD><TD>14:00 31/01/2017</TD><TD>2</TD><TD>710.000 VND</TD></TR>
+    <TR><TD th:text="${busRoute.busService.name}"></TD><TD th:text="${route}"></TD><TD th:text="${busRoute.getDepartureTime()}"></TD><TD th:text="${customer.numberOfTickets}"></TD><TD th:text="${busRoute.getTicketPrice()}"></TD></TR>
     </table>
 
-    <form name="form3" action="" method="post" class="form3">
+    <form id="form3" action="" method="post" class="form3">
             <label>Xin chọn hình thức thanh toán</label>
             <br/>
-            <input type="radio" name="group1" value="taiquay"/>Thanh toán tại quầy (1 ngày trước khi khởi hành)
+            <input type="radio" id="quay" name="group1" value="taiquay"/>Thanh toán tại quầy (1 ngày trước khi khởi hành)
             <br/>
-            <input type="radio" name="group1" value="nganhang"/>Thanh toán qua tài khoản ngân hàng
+            <input type="radio" id="nganhang" name="group1" value="nganhang"/>Thanh toán qua tài khoản ngân hàng
+            <div class="form_button3">
+            <a th:href="@{/}"><button type="button" class="submit">Huỷ</button></a>
+            <input type="submit" value="Đặt vé" class="submit"/> 
+    </div>
     </form>
 
-    <div class="form_button3">
-        <input type="button" value="Huỷ" class="submit"/>
-        <input type="submit" value="Đặt vé" class="submit"/> 
-    </div>
+    
+    </th:block>
+
 </body>
 </html>    

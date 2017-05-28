@@ -27,4 +27,10 @@ public class CustomerServiceImpl implements CustomerService{
 		customerRepo.delete(customer);
 	}
 
+	@Override
+	public Customer find(String code) {
+		return customerRepo.findOne(code);
+		
+	}
+
 }

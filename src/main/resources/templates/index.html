@@ -109,7 +109,13 @@
 									đến: <span th:text="${busRoute.arrivalTime}"></span> <br /></td>
 								<td><span th:text="${busRoute.ticketPrice}"></span>đ<br />Còn
 									<span th:text="${busRoute.remainingTickets}"></span> vé<br />
-									<a th:href="@{/book/} + ${busRoute.id}"><button type="button" class="btn">Đặt vé</button></a></td>
+									<th:block th:if="${busRoute.remainingTickets > 0}">
+										<a th:href="@{/book/} + ${busRoute.id}"><button type="button" class="btn">Đặt vé</button></a>
+									</th:block>
+									<th:block th:unless="${busRoute.remainingTickets > 0}">
+										<a href=""><button type="button" class="btn" disabled="true">Hết vé</button></a>
+									</th:block>
+									</td>
 								<td><span th:text="${busRoute.busService.phoneNumber}"></span></td>
 								<td>
 									<div class="checkbox">
@@ -238,7 +244,7 @@
 				<!-- <span class="form-field-name">Mã vé</span> -->
 				<div class="input-group add-on">
 					<div class="form-group">
-						<input class="form-control" type="text" placeholder="Mã vé" />
+						<input class="form-control" type="text" id="txtMaVe" placeholder="Mã vé" />
 					</div>
 				</div>
 			</form>
@@ -246,7 +252,7 @@
 			<div>
 				<a href="#" class="btn home-dialog-close"
 					id="home-dialog-cancel-btn">Huỷ</a> <a href="#"
-					class="btn home-dialog-close" id="home-dialog-ok-btn">Xác nhận</a>
+					class="btn home-dialog-close" id="home-dialog-cancel-booking-ok-btn">Xác nhận</a>
 			</div>
 		</div>
 	</div>

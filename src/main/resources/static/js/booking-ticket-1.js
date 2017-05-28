@@ -5,6 +5,10 @@ $(document).ready(function () {
 	$('#giodi').val(ngaydi.substring(10,ngaydi.length));
 
 	 $('#soluongve').on('input',function(e){
+	 	if ($('#soluongve').val() > $('#max').val()) {
+	 		$('#soluongve').val($('#max').val());
+	 		alert("chỉ còn tối đa" + $('#max').val() + "vé");
+	 	}
     	$('#tongtien').val($("#giave").val() * $('#soluongve').val());
     });
 	 

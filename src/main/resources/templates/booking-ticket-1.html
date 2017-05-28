@@ -18,7 +18,6 @@
             src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.16.0/jquery.validate.min.js"></script>
     <script
             src="https://cdnjs.cloudflare.com/ajax/libs/json2/20160511/json2.js"></script>
-
     <script
             src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.0/additional-methods.js"></script>
 
@@ -32,6 +31,7 @@
     <form id="form1" name = "form1" action="" method = "post" class="form">    
         <div class = "container">    
         <input type="text" id="id" style="display:none" th:value="${busRoute.id}"/>
+        <input type="text" id="max" style="display:none" th:value="${max}"/>
             <div class = "form_group">    
                 <label>Nhà xe:</label>    
                 <input type="text" name="nhaxe" th:value= "${busRoute.getBusService().getName()}" readonly="readonly"/>    

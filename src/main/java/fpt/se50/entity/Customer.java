@@ -15,8 +15,7 @@ import javax.persistence.Table;
 @Table(name="customer")
 public class Customer {
 	@Id
-	@Column(name="ID")
-	//id = CMND + Random 
+	@Column(name="ID") 
 	private String id;
 	
 	@Column(name="NAME")
@@ -43,6 +42,16 @@ public class Customer {
 	@Column(name="TICKET_ID")
 	private int idTicket;
 	
+	@Column(name="METHOD")
+	//0: tai quay, 1: tai ngan hang
+	private int method;
+	
+	public int getMethod() {
+		return method;
+	}
+	public void setMethod(int method) {
+		this.method = method;
+	}
 	public String getId() {
 		return id;
 	}

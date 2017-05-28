@@ -4,24 +4,63 @@ $(window).on("load resize ", function() {
 }).resize();
 
 $(document).ready(function () {
-	
-	var message = $("#message").val();
-	console.log(message);
-	if (message==""){
-		
-	} else if (message=="empty!"){
-		 swal({
+    ////////////////////
+
+$('#home-dialog-cancel-booking-ok-btn').on('click', function(e) {
+                var code = $('#txtMaVe').val();
+                var token = $("meta[name='_csrf']").attr("content");
+                var header = $("meta[name='_csrf_header']").attr("content");
+                var urls = "/cancel/" + code;
+                $.ajax({
+                    type: 'POST',
+                    url: urls,
+                    contentType: "application/json; charset=utf-8",
+                    traditional: true,
+                    beforeSend: function(xhr) {
+                        xhr.setRequestHeader(header, token);
+                    },
+                    success: function(data) {
+                        swal({
+                            title: 'Hủy vé thành công',
+                            text: data.responseText,
+                            type: 'success'
+                        }).then(function(){
+                                   window.location.replace("/");
+                               });
+
+                    },
+                    error: function(data) {
+                        swal({
+                            title: 'Có lỗi xảy ra',
+                            text: "Mã vé không tồn tại",
+                            type: 'error'
+                        });
+                    }
+                });
+            });
+
+
+
+
+    //////////////////
+    
+    var message = $("#message").val();
+    console.log(message);
+    if (message==""){
+        
+    } else if (message=="empty!"){
+         swal({
              title: 'Oops',
              text: "không tìm thấy kết quả nào!",
              type: 'error'
          });
-	} else {
-		 swal({
+    } else {
+         swal({
              title: 'Đã tìm thấy',
              text: message,
              type: 'success'
          });
-	}
+    }
 
     if (getUrlParameter("true") != null) {
         showWelcomeLoginSuccess();
@@ -68,7 +107,7 @@ $(document).ready(function () {
             }
         });
 
-        $( "#home-add-bus-route-btn" ).button().on( "click", function() {        	
+        $( "#home-add-bus-route-btn" ).button().on( "click", function() {           
             $("#home-dialog").removeClass('dialog-close').addClass('dialog-open');
             $("#home-dialog-add-btn").show();
             $("#home-dialog-cancel-btn").show();
@@ -76,100 +115,100 @@ $(document).ready(function () {
 
             /////////////EVENT////////////////////
             $("#home-dialog-add-btn").on('click',function(){
-            	
-            	// validate
+                
+                // validate
                 $("#dialog-form").validate({
-            		rules:{
-            			name_home_dialog_destination: { 
-            				required: true,
-            				maxlength: 100
-            			}, 
-            			name_home_dialog_departure_day: {
-            				required: true,
-            				dateITA: true,
-            				maxlength: 100
-            			}, 
-            			name_home_dialog_departure_time: {
-            				required: true,
-            				time: true, 
-            				maxlength: 100
-            			}, 
-            			name_home_dialog_arrival_day: {
-            				required: true,
-            				dateITA: true, 
-            				maxlength: 100
-            			}, 
-            			name_home_dialog_arrival_time: {
-            				required: true,
-            				time: true, 
-            				maxlength: 100
-            			}, 
-            			name_home_dialog_bus_service: { 
-            				required: true, 
-            				maxlength: 100
-            			}, 
-            			name_home_dialog_bus_service_destination: { 
-            				required: true, 
-            				maxlength: 100
-            			}, 
-            			name_home_dialog_ticket_price: {
-            				required: true, 
-            				digits: true, 
-            				maxlength: 100
-            			}, 
-            			name_home_dialog_total_ticket: {
-            				required: true, 
-            				digits: true,
-            				range: [10, 80], 
-            				maxlength: 100
-            			}
-            		}, 
-            		messages: {
-            			name_home_dialog_destination: { 
-            				required: "must fill",
-            				maxlength: "maxlen 100"
-            			},
-            			name_home_dialog_departure_day: {
-            				required: "must fill",
-            				dateITA: "dd/mm/yyyy", 
-            				maxlength: "maxlen 100"
-            			}, 
-            			name_home_dialog_departure_time: {
-            				required: "must fill",
-            				time: "hh:mm", 
-            				maxlength: "maxlen 100"
-            			}, 
-            			name_home_dialog_arrival_day: {
-            				required: "must fill",
-            				dateITA: "dd/mm/yyyy", 
-            				maxlength: "maxlen 100"
-            			}, 
-            			name_home_dialog_arrival_time: {
-            				required: "must fill",
-            				time: "hh:mm", 
-            				maxlength: "maxlen 100"
-            			}, 
-            			name_home_dialog_bus_service: { 
-            				required: "must fill", 
-            				maxlength: "maxlen 100"
-            			}, 
-            			name_home_dialog_bus_service_destination: { 
-            				required: "must fill",
-            				maxlength: "maxlen 100"
-            			}, 
-            			name_home_dialog_ticket_price: {
-            				required: "must fill",
-            				digits: "integer", 
-            				maxlength: "maxlen 100"
-            			}, 
-            			name_home_dialog_total_ticket: {
-            				required: "must fill",
-            				digits: "integer",
-            				range: "10 to 80", 
-            				maxlength: "maxlen 100"
-            			}
-            		},
-            		submitHandler: function(form) {
+                    rules:{
+                        name_home_dialog_destination: { 
+                            required: true,
+                            maxlength: 100
+                        }, 
+                        name_home_dialog_departure_day: {
+                            required: true,
+                            dateITA: true,
+                            maxlength: 100
+                        }, 
+                        name_home_dialog_departure_time: {
+                            required: true,
+                            time: true, 
+                            maxlength: 100
+                        }, 
+                        name_home_dialog_arrival_day: {
+                            required: true,
+                            dateITA: true, 
+                            maxlength: 100
+                        }, 
+                        name_home_dialog_arrival_time: {
+                            required: true,
+                            time: true, 
+                            maxlength: 100
+                        }, 
+                        name_home_dialog_bus_service: { 
+                            required: true, 
+                            maxlength: 100
+                        }, 
+                        name_home_dialog_bus_service_destination: { 
+                            required: true, 
+                            maxlength: 100
+                        }, 
+                        name_home_dialog_ticket_price: {
+                            required: true, 
+                            digits: true, 
+                            maxlength: 100
+                        }, 
+                        name_home_dialog_total_ticket: {
+                            required: true, 
+                            digits: true,
+                            range: [10, 80], 
+                            maxlength: 100
+                        }
+                    }, 
+                    messages: {
+                        name_home_dialog_destination: { 
+                            required: "must fill",
+                            maxlength: "maxlen 100"
+                        },
+                        name_home_dialog_departure_day: {
+                            required: "must fill",
+                            dateITA: "dd/mm/yyyy", 
+                            maxlength: "maxlen 100"
+                        }, 
+                        name_home_dialog_departure_time: {
+                            required: "must fill",
+                            time: "hh:mm", 
+                            maxlength: "maxlen 100"
+                        }, 
+                        name_home_dialog_arrival_day: {
+                            required: "must fill",
+                            dateITA: "dd/mm/yyyy", 
+                            maxlength: "maxlen 100"
+                        }, 
+                        name_home_dialog_arrival_time: {
+                            required: "must fill",
+                            time: "hh:mm", 
+                            maxlength: "maxlen 100"
+                        }, 
+                        name_home_dialog_bus_service: { 
+                            required: "must fill", 
+                            maxlength: "maxlen 100"
+                        }, 
+                        name_home_dialog_bus_service_destination: { 
+                            required: "must fill",
+                            maxlength: "maxlen 100"
+                        }, 
+                        name_home_dialog_ticket_price: {
+                            required: "must fill",
+                            digits: "integer", 
+                            maxlength: "maxlen 100"
+                        }, 
+                        name_home_dialog_total_ticket: {
+                            required: "must fill",
+                            digits: "integer",
+                            range: "10 to 80", 
+                            maxlength: "maxlen 100"
+                        }
+                    },
+                    submitHandler: function(form) {
                         var token = $("meta[name='_csrf']").attr("content");
                         var header = $("meta[name='_csrf_header']").attr("content");
                         
@@ -177,7 +216,7 @@ $(document).ready(function () {
                           source: "Đà Nẵng-Bến xe TT Đà nẵng",
                            destination:$("#home-dialog-destination").val(), // Nơi đến: Sài Gòn 
                            busServiceDestination: $("#home-dialog-bus-service-destination").val(), // Bến xe: Bến xe Miền Đông  
-                           busService:$("#home-dialog-bus-service").val(),	// Nhà xe: ABC 
+                           busService:$("#home-dialog-bus-service").val(),  // Nhà xe: ABC 
                            departureTime: $("#home-dialog-departure-time").val(), // Giờ đi: 7:30   
                            departureDate: $("#home-dialog-departure-day").val().replace(/\//g, '-'), // Ngày đi: 21-05-1995 
                            arrivalTime: $("#home-dialog-arrival-time").val(), // Giờ đến: 8:30  
@@ -214,9 +253,9 @@ $(document).ready(function () {
                               window.location.reload();
                           }
                       });
-            		}
-            	});
-            	
+                    }
+                });
+                
           });
 
             /////////////EVENT////////////////////
@@ -256,146 +295,146 @@ $(document).ready(function () {
         });
         
         function ajax_edit(id){
-        	
-        	
-        	// validate
+            
+            
+            // validate
             $("#dialog-form").validate({
-        		rules:{
-        			name_home_dialog_destination: { 
-        				required: true, 
-        				maxlength: 100
-        			}, 
-        			name_home_dialog_departure_day: {
-        				required: true,
-        				dateITA: true, 
-        				maxlength: 100
-        			}, 
-        			name_home_dialog_departure_time: {
-        				required: true,
-        				time: true,
-        				maxlength: 100
-        			}, 
-        			name_home_dialog_arrival_day: {
-        				required: true,
-        				dateITA: true,
-        				maxlength: 100
-        			}, 
-        			name_home_dialog_arrival_time: {
-        				required: true,
-        				time: true,
-        				maxlength: 100
-        			}, 
-        			name_home_dialog_bus_service: { 
-        				required: true, 
-        				maxlength: 100
-        			}, 
-        			name_home_dialog_bus_service_destination: {
-        				required: true,
-        				maxlength: 100
-        			}, 
-        			name_home_dialog_ticket_price: {
-        				required: true, 
-        				digits: true,
-        				maxlength: 100
-        			}, 
-        			name_home_dialog_total_ticket: {
-        				required: true, 
-        				digits: true,
-        				range: [10, 80],
-        				maxlength: 100
-        			}
-        		}, 
-        		messages: {
-        			name_home_dialog_destination: { 
-        				required: "must fill",
-        				maxlength: "maxlen 100"
-        			},
-        			name_home_dialog_departure_day: {
-        				required: "must fill",
-        				dateITA: "dd/mm/yyyy",
-        				maxlength: "maxlen 100"
-        			}, 
-        			name_home_dialog_departure_time: {
-        				required: "must fill",
-        				time: "hh:mm",
-        				maxlength: "maxlen 100"
-        			}, 
-        			name_home_dialog_arrival_day: {
-        				required: "must fill",
-        				dateITA: "dd/mm/yyyy",
-        				maxlength: "maxlen 100"
-        			}, 
-        			name_home_dialog_arrival_time: {
-        				required: "must fill",
-        				time: "hh:mm",
-        				maxlength: "maxlen 100"
-        			}, 
-        			name_home_dialog_bus_service: { 
-        				required: "must fill",
-        				maxlength: "maxlen 100"
-        			}, 
-        			name_home_dialog_bus_service_destination: { 
-        				required: "must fill",
-        				maxlength: "maxlen 100"
-        			}, 
-        			name_home_dialog_ticket_price: {
-        				required: "must fill",
-        				digits: "integer",
-        				maxlength: "maxlen 100"
-        			}, 
-        			name_home_dialog_total_ticket: {
-        				required: "must fill",
-        				digits: "integer",
-        				range: "10 to 80",
-        				maxlength: "maxlen 100"
-        			}
-        		},
-        		submitHandler: function(form) {
-        			var token = $("meta[name='_csrf']").attr("content");
+                rules:{
+                    name_home_dialog_destination: { 
+                        required: true, 
+                        maxlength: 100
+                    }, 
+                    name_home_dialog_departure_day: {
+                        required: true,
+                        dateITA: true, 
+                        maxlength: 100
+                    }, 
+                    name_home_dialog_departure_time: {
+                        required: true,
+                        time: true,
+                        maxlength: 100
+                    }, 
+                    name_home_dialog_arrival_day: {
+                        required: true,
+                        dateITA: true,
+                        maxlength: 100
+                    }, 
+                    name_home_dialog_arrival_time: {
+                        required: true,
+                        time: true,
+                        maxlength: 100
+                    }, 
+                    name_home_dialog_bus_service: { 
+                        required: true, 
+                        maxlength: 100
+                    }, 
+                    name_home_dialog_bus_service_destination: {
+                        required: true,
+                        maxlength: 100
+                    }, 
+                    name_home_dialog_ticket_price: {
+                        required: true, 
+                        digits: true,
+                        maxlength: 100
+                    }, 
+                    name_home_dialog_total_ticket: {
+                        required: true, 
+                        digits: true,
+                        range: [10, 80],
+                        maxlength: 100
+                    }
+                }, 
+                messages: {
+                    name_home_dialog_destination: { 
+                        required: "must fill",
+                        maxlength: "maxlen 100"
+                    },
+                    name_home_dialog_departure_day: {
+                        required: "must fill",
+                        dateITA: "dd/mm/yyyy",
+                        maxlength: "maxlen 100"
+                    }, 
+                    name_home_dialog_departure_time: {
+                        required: "must fill",
+                        time: "hh:mm",
+                        maxlength: "maxlen 100"
+                    }, 
+                    name_home_dialog_arrival_day: {
+                        required: "must fill",
+                        dateITA: "dd/mm/yyyy",
+                        maxlength: "maxlen 100"
+                    }, 
+                    name_home_dialog_arrival_time: {
+                        required: "must fill",
+                        time: "hh:mm",
+                        maxlength: "maxlen 100"
+                    }, 
+                    name_home_dialog_bus_service: { 
+                        required: "must fill",
+                        maxlength: "maxlen 100"
+                    }, 
+                    name_home_dialog_bus_service_destination: { 
+                        required: "must fill",
+                        maxlength: "maxlen 100"
+                    }, 
+                    name_home_dialog_ticket_price: {
+                        required: "must fill",
+                        digits: "integer",
+                        maxlength: "maxlen 100"
+                    }, 
+                    name_home_dialog_total_ticket: {
+                        required: "must fill",
+                        digits: "integer",
+                        range: "10 to 80",
+                        maxlength: "maxlen 100"
+                    }
+                },
+                submitHandler: function(form) {
+                    var token = $("meta[name='_csrf']").attr("content");
                     var header = $("meta[name='_csrf_header']").attr("content");
                     var url = '/busroute/'+id+'/edit';
                     console.log('url = '+url);
                     var data= {
-                    		source: "Đà Nẵng-Bến xe TT Đà nẵng",
-                    		destination:$("#home-dialog-destination").val(), // Nơi đến: Sài Gòn 
-                    		busServiceDestination: $("#home-dialog-bus-service-destination").val(), // Bến xe: Bến xe Miền Đông  
-                    		busService:$("#home-dialog-bus-service").val(),	// Nhà xe: ABC 
-                    		departureTime: $("#home-dialog-departure-time").val(), // Giờ đi: 7:30   
-                    		departureDate: $("#home-dialog-departure-day").val(), // Ngày đi: 21-05-1995 
-                    		arrivalTime: $("#home-dialog-arrival-time").val(), // Giờ đến: 8:30  
-                    		arrivalDate: $("#home-dialog-arrival-day").val(), // Ngày đến: 21-05-1995
-                    		ticketPrice: $("#home-dialog-ticket-price").val(), // Giá tiền: 69000 
-                    		totalTickets: $("#home-dialog-total-ticket").val(), // Tổng số vé: 30
+                            source: "Đà Nẵng-Bến xe TT Đà nẵng",
+                            destination:$("#home-dialog-destination").val(), // Nơi đến: Sài Gòn 
+                            busServiceDestination: $("#home-dialog-bus-service-destination").val(), // Bến xe: Bến xe Miền Đông  
+                            busService:$("#home-dialog-bus-service").val(), // Nhà xe: ABC 
+                            departureTime: $("#home-dialog-departure-time").val(), // Giờ đi: 7:30   
+                            departureDate: $("#home-dialog-departure-day").val(), // Ngày đi: 21-05-1995 
+                            arrivalTime: $("#home-dialog-arrival-time").val(), // Giờ đến: 8:30  
+                            arrivalDate: $("#home-dialog-arrival-day").val(), // Ngày đến: 21-05-1995
+                            ticketPrice: $("#home-dialog-ticket-price").val(), // Giá tiền: 69000 
+                            totalTickets: $("#home-dialog-total-ticket").val(), // Tổng số vé: 30
                     };
 
                     $.ajax({
-                    	type: 'POST',
-                    	url: '/busroute/'+id+'/edit',
-                    	contentType: "application/json; charset=utf-8",
-                    	dataType: "json",
-                    	data: JSON.stringify(data),
-                    	traditional: true,
-                    	beforeSend: function(xhr){
-                    		xhr.setRequestHeader(header, token);
-                    	},
-                    	success: function(data) {
-                    		
-                    		console.log(data);
-                    		swal({
-                    			title: 'Thành công',
-                    			text: data.responseText,
-                    			type: 'success'
-                    		})
-                    		
-                    		window.location.reload();
-                    	},
-                    	error:function(data){
-                    		alert(data.responseText);
+                        type: 'POST',
+                        url: '/busroute/'+id+'/edit',
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+                        data: JSON.stringify(data),
+                        traditional: true,
+                        beforeSend: function(xhr){
+                            xhr.setRequestHeader(header, token);
+                        },
+                        success: function(data) {
+                            
+                            console.log(data);
+                            swal({
+                                title: 'Thành công',
+                                text: data.responseText,
+                                type: 'success'
+                            })
+                            
                             window.location.reload();
-                    	}
+                        },
+                        error:function(data){
+                            alert(data.responseText);
+                            window.location.reload();
+                        }
                     });
-        		}
-        	});
+                }
+            });
         }
 
         $( "#home-delete-bus-route-btn" ).button().on( "click", function() {
@@ -543,7 +582,7 @@ function logout() {
 
         for (var idx = 1; idx <= cnttr; idx++)
         {
-		//////////////////////////////////////////// SOURCE
+        //////////////////////////////////////////// SOURCE
         var txt = $('.table-content').find('tr:nth-child(' + idx + ') td:nth-child(4) > span:nth-of-type(1)').text();
         var place = "";
         var busStop = "";

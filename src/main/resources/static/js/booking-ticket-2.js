@@ -28,14 +28,10 @@ $(document).ready(function () {
             	xhr.setRequestHeader(header, token);
 			},
             success: function(data) {
-				
+				window.location.replace("/confirm");
 			},
 			error:function(data){
-				swal({
-                	title: 'Thất bại',
-                    text: data.responseText,
-                    type: 'error'
-                    });
+				window.location.replace("/confirm");
             }
 		});
                    });
